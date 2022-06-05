@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 using Rewinery.Client;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -14,5 +15,8 @@ builder.Services.AddHttpClient("Rewinery.ServerAPI", client => client.BaseAddres
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Rewinery.ServerAPI"));
 
 builder.Services.AddApiAuthorization();
+
+//MudBlazor
+builder.Services.AddMudServices();
 
 await builder.Build().RunAsync();
