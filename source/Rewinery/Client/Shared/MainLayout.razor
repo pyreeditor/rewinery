@@ -5,12 +5,12 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Style="@($"background:{Colors.BlueGrey.Darken4};")" Fixed="false" Dense="true" Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@OpenDrawer" />
+    <MudAppBar Style="@($"background:{Colors.Grey.Darken4}; color:{Colors.Grey.Lighten4};")" Fixed="false" Dense="true" Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@OpenDrawer" />
         <MudSpacer />
         <LoginDisplay />
     </MudAppBar>
-    <MudDrawer @bind-Open="@open" Anchor="@anchor" Elevation="1" Variant="@DrawerVariant.Temporary">
+    <MudDrawer Style="@($"background:{Colors.Grey.Darken4}; color:{Colors.Grey.Lighten4};")" @bind-Open="@open" Anchor="@anchor" Elevation="1" Variant="@DrawerVariant.Temporary">
         <MudDrawerHeader>
             <MudText Typo="Typo.h6">Rewinery</MudText>
         </MudDrawerHeader>
