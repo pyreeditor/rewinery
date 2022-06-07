@@ -1,7 +1,7 @@
 ﻿
 
 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-    <div class="card mb-3" style="max-width: 750px;">
+    <div class="card mb-3" style="">
         <div class="row no-gutters">
             <div class="col-md-4">
                 <img src="https://previews.123rf.com/images/olgamallary/olgamallary1710/olgamallary171000443/87862349-set-of-different-wine-bottles-types-of-wine-flat-design-style-vector-illustration-.jpg" class="card-img" alt="...">
@@ -15,16 +15,20 @@
                     <p></p>
                     <h5>Price: <span class="WineCardPrice">21$/liter</span></h5>
                     <div class="row no-gutters">
-                        <div class="col-md-5">
-                            <a href="#" class="WineCardActions">Learn More</a>
-                        </div>
-                        <div class="col-md-5">
-                            <a href="#" class="WineCardActions">Compare</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="#" class="WineCardActions">
-                                &#9825
+                        <div class="col-md-5 col-sm-5">
+                            <a href="#">
+                                <MudButton Variant="Variant.Text" Color="Color.Secondary">Learn More</MudButton>
                             </a>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <a href="#">
+                                <MudButton Variant="Variant.Text" EndIcon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary">Compare</MudButton>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <MudToggleIconButton @bind-Toggled="@LikeOn" style="padding-top: 5px"
+                                                 Icon="@Icons.Outlined.FavoriteBorder" Color="@Color.Dark" Title="Off"
+                                                 ToggledIcon="@Icons.Material.Filled.Favorite" ToggledColor="@Color.Error" ToggledTitle="On" />
                         </div>
                     </div>
                 </div>
@@ -36,5 +40,5 @@
 
 
 @code {
-
+    public bool LikeOn { get; set; }
 }
