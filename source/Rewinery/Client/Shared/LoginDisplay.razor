@@ -10,8 +10,8 @@
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <a class="nav-link" href="authentication/register">Register</a>
-        <a class="nav-link" href="authentication/login">Log in</a>
+        <MudChip Href="authentication/register" Variant="Variant.Text" Color="Color.Primary">Register</MudChip>
+        <MudChip Href="authentication/login" Variant="Variant.Text" Color="Color.Primary">Log in</MudChip>
     </NotAuthorized>
 </AuthorizeView>
 
