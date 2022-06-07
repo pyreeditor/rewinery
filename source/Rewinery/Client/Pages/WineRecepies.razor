@@ -2,8 +2,11 @@
 @using Shared.Components
 
 <div class="container">
-
-        
+    <div class="row">
+        <h4>Our Recepies</h4>
+    </div>
+    <div class="row mt-5">
+        <Rewinery.Client.Shared.Components.WineRecepiesPageSideBar></Rewinery.Client.Shared.Components.WineRecepiesPageSideBar>
         <div class="col-10" id="products">
             <div class="container">
                 <div class="row">
@@ -22,13 +25,11 @@
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 
 
 
-    @code{
-        public bool Label_CheckBox2 { get; set; } = false;
-        public double? Amount { get; set; }
-        public string? Search { get; set; }
+    @code {
+    public bool Label_CheckBox2 { get; set; } = false;
 }
