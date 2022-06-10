@@ -1,0 +1,54 @@
+﻿@using Shared.Components
+@page "/winerecepiescompare"
+
+<div class="container">
+    <div class="row">
+    </div>
+    <div class="row mt-6">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="mb-6" scope="col"><MudButton Size="Size.Medium" Variant="Variant.Text" StartIcon="@Icons.Rounded.ArrowBackIos" Color="Color.Dark"><span>Back to recepies</span></MudButton></th>
+                        <th style="font-size: 24px; text-align: left" scope="col">Bandera Smoozie<MudIconButton Icon="@Icons.Rounded.Close" style="margin-left: -10px"aria-label="remove from compare"></MudIconButton></th>
+                        <th style="font-size: 24px; text-align: left" scope="col">Ku Klux Klan<MudIconButton Icon="@Icons.Rounded.Close" style="margin-left: -10px"aria-label="remove from compare"></MudIconButton></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="col-2"></th>
+                        <th class="col-5"><img class="" style="max-height: 450px; margin-left:auto; margin-right:auto; display: block; " src="/images/cardimages/RedWineBottleAndGlass_1.svg" /></th>
+                        <th class="col-5"><img class="" style="max-height: 450px; margin-left:auto; margin-right:auto; display: block; " src="/images/cardimages/WhiteWineBottleAndGlass.svg" /></th>
+                    </tr>
+                </tbody>
+                
+                <tbody>
+                    <tr>
+                        <th scope="row">Wine Type</th>
+                        <td>Red</td>
+                        <td>White</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Grape</th>
+                        <td>Victoria</td>
+                        <td>Some other grape</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Price</th>
+                        <td>21$/liter</td>
+                        <td>25$/liter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Components</th>
+                        <td>Component1, Component2, Component3, Component4, Component5</td>
+                        <td>Component1, Component2, Component3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}
