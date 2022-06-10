@@ -5,12 +5,12 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Style="@($"background:{Colors.Grey.Darken4}; color:{Colors.Grey.Lighten4};")" Fixed="false" Dense="true" Elevation="1">
+    <MudAppBar Style="@($"background:{Colors.Grey.Darken4}; color:{Colors.Grey.Lighten4};")" Fixed="true" Dense="true" Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@OpenDrawer" />
         <MudSpacer />
         <form class="d-flex w-50">
             <input class="form-control me-2 h-75 justify-content-center m-auto" type="search" placeholder="Search" aria-label="Search">
-            <MudIconButton Href="#" Icon="@Icons.Filled.Search" Variant="Variant.Outlined"  Color="Color.Primary" Size="Size.Small" />
+            <MudIconButton Href="#" Icon="@Icons.Filled.Search" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
         </form>
         <MudSpacer />
         <LoginDisplay />
@@ -21,13 +21,10 @@
         </MudDrawerHeader>
         <MudNavMenu>
             <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/counter">Counter</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/fetchdata">Fetch data</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/winerecepies">Recepies</MudNavLink>
         </MudNavMenu>
     </MudDrawer>
-    <MudMainContent Class="pt-4 px-4">
-        @Body
-    </MudMainContent>
+    @Body
 </MudLayout>
 
 @code {
