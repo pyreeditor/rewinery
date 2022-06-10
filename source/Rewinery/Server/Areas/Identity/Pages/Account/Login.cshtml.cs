@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Rewinery.Server.Models;
+using Rewinery.Server.Core.Models;
 
 namespace Rewinery.Server.Areas.Identity.Pages.Account
 {
