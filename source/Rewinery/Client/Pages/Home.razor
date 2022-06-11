@@ -1,34 +1,20 @@
 ﻿@page "/"
-@inject IJSRuntime jsRuntimeService
 
 <PageTitle>Home</PageTitle>
 
-<div class="tm-container home-text gradient-bg">
-    <div>
-        <div class="tm-row">
-            <div class="tm-col-left"></div>
-            <main class="tm-col-right">
-                <section class="tm-content">
-                    <h2 class="mb-5 tm-content-title">Welcome to our site</h2>
-                    <p class="mb-5">null</p>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary">Continue</MudButton>
-                </section>
-            </main>
+<div class="bg-animation">
+    <div class="glass" style="width:90%; height:80%;">
+        <div class="position-absolute top-50 start-50 translate-middle text-white">
+            <h1>Hello dear customer</h1>
+            <p>We have prepared for you many interesting recipes for wine, which you can make yourself or order from us</p>
+            <a href="#" class="btn-neon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                start
+            </a>
         </div>
-    </div>
-
-    <div class="tm-row justify-content-end px-5">
-        <div class="tm-col-footer">
-            <footer class="tm-site-footer text-right">
-                <p class="mb-0">
-                    Licence 2022 Rewinery
-                </p>
-            </footer>
-        </div>
-    </div>
-
-    <div class="tm-bg">
-        <div class="tm-bg-left"></div>
-        <div class="tm-bg-right"></div>
+        <div class="position-absolute bottom-0 end-0 m-4">©  Rewinery 2022</div>
     </div>
 </div>
