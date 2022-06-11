@@ -6,7 +6,7 @@
 
 <MudLayout>
     <MudAppBar Style="@($"{MudAppBarStyle}")" Fixed="true" Dense="true" Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@OpenDrawer" />
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@(() => ToggleDrawer())" />
         <MudSpacer />
         <form class="d-flex w-50">
             <input class="form-control me-2 h-75 justify-content-center m-auto" type="search" placeholder="Search" aria-label="Search">
@@ -15,7 +15,7 @@
         <MudSpacer />
         <LoginDisplay />
     </MudAppBar>
-    <MudDrawer Style="@($"background:{Colors.Grey.Darken4}; color:{Colors.Grey.Lighten4};")" @bind-Open="@open" ClipMode="DrawerClipMode.Always" Anchor="@anchor" Elevation="1" Variant="@DrawerVariant.Temporary">
+    <MudDrawer Style="@($"{MudDrawerStyle}")" @bind-Open="@open" Anchor="Anchor.Start" Elevation="1" DisableOverlay="true" ClipMode="DrawerClipMode.Always" Variant="@DrawerVariant.Temporary">
         <MudDrawerHeader>
             <MudText Typo="Typo.h6">Rewinery</MudText>
         </MudDrawerHeader>
@@ -29,14 +29,15 @@
 
 @code {
     bool open;
-    Anchor anchor;
     public string? Search { get; set; }
-    string MudAppBarStyle = "margin: 1%; border-radius: 16px; width: 98%; background: inherit;" + 
-    "background-color: unset; color: unset;  box-shadow: inset 0 0 500px rgba(255, 255, 255, .4); filter: blur(50%); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.15);";
 
-    void OpenDrawer()
+    string MudAppBarStyle = "margin: 1%; border-radius: 16px; width: 98%;" + 
+    "background-color: unset; color: unset;  box-shadow: inset 0 0 500px rgba(255, 255, 255, 0.5), 0 6px 20px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.15); backdrop-filter: blur(5px);";
+    string MudDrawerStyle = "margin-top: 2% !important; margin-left: 1% !important; padding-top: 2%; height: 88%; width: 14%; border-radius: 16px;" + 
+    "background-color: unset; color: unset;  box-shadow: inset 0 0 500px rgba(255, 255, 255, 0.5), 0 6px 20px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.15); backdrop-filter: blur(15px);";
+    
+    void ToggleDrawer()
     {
-        open = true;
-        anchor = Anchor.Start;
+        open = !open;
     }
 }
