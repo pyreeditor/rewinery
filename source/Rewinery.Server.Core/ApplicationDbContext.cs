@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Rewinery.Server.Core.Models;
+using Rewinery.Server.Core.Models.Cellar;
 using Rewinery.Server.Core.Models.Comment;
 using Rewinery.Server.Core.Models.Orders;
 using Rewinery.Server.Core.Models.Wines;
@@ -11,13 +12,15 @@ namespace Rewinery.Server.Core
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        #pragma warning disable CS8618
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+        #pragma warning restore CS8618
 
-        public DbSet<WineReceipt> WineReceipts { get; set; }
+        public DbSet<WineRecipe> WineRecipes { get; set; }
 
         #region wine
         public DbSet<Wine> Wines { get; set; }
@@ -32,7 +35,7 @@ namespace Rewinery.Server.Core
         #endregion
 
         #region comment
-        public DbSet<ReceiptComment> ReceiptComments { get; set; }
+        public DbSet<RecipeComment> RecipeComments { get; set; }
 
         public DbSet<CommentResponse> CommentResponses { get; set; }
         #endregion
@@ -41,6 +44,12 @@ namespace Rewinery.Server.Core
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderStatus> OrderStatuses { get; set; }
+        #endregion
+
+        #region cellar
+        public DbSet<Cellar> Cellars { get; set; }
+
+        public DbSet<CellarRental> CellarRentals { get; set; }
         #endregion
     }
 }

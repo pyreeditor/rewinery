@@ -9,6 +9,7 @@ namespace Rewinery.Server.Core.Models.Wines
 {
     public class Ingredient : BaseEntity
     {
+        #pragma warning disable CS8618
         public string Name { get; set; } = "Some ingradient";
 
         public string Icon { get; set; }
@@ -16,5 +17,6 @@ namespace Rewinery.Server.Core.Models.Wines
         public decimal Price { get; set; }
 
         public ICollection<Wine> Wine { get; set; }
+        #pragma warning restore CS8618
     }
 }

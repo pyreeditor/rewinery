@@ -9,10 +9,21 @@ namespace Rewinery.Server.Core.Models.Comment
 {
     public class CommentResponse : BaseEntity
     {
-        public ReceiptComment Comment { get; set; }
+        #pragma warning disable CS8618
+        /// <summary>
+        /// Information about user comment for wine recipe
+        /// </summary>
+        public RecipeComment Comment { get; set; }
 
+        /// <summary>
+        /// Information about the user who written the responce to comment
+        /// </summary>
         public ApplicationUser User { get; set; }
 
+        /// <summary>
+        /// Text of comment responce
+        /// </summary>
         public string Responce { get; set; }
+        #pragma warning restore CS8618
     }
 }
