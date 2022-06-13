@@ -9,7 +9,7 @@ namespace Rewinery.Server.Core.Models
 
         public string? LastName { get; set; }
 
-        public string Nickname { get; set; } = "user" + DatabaseGeneratedOption.Identity;
+        public override string UserName { get; set; } = "user" + DatabaseGeneratedOption.Identity;
 
         public ICollection<WineReceipt>? WineReceipts { get; set; }
     }

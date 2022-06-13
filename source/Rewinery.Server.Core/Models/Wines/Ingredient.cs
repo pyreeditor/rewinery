@@ -11,6 +11,8 @@ namespace Rewinery.Server.Core.Models.Wines
     {
         public string Name { get; set; } = "Some ingradient";
 
+        public string Icon { get; set; }
+
         public decimal Price { get; set; }
 
         public ICollection<Wine> Wine { get; set; }

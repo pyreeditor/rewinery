@@ -10,6 +10,8 @@ namespace Rewinery.Server.Core.Models
 
         public bool Public { get; set; }
 
+        public string Icon { get; set; }
+
         public Wine Wine { get; set; }
 
         public ICollection<ReceiptComment> Comments { get; set; }

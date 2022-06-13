@@ -6,10 +6,12 @@ namespace Rewinery.Server.Core.Models.Wines
     {
         public string Name { get; set; } = "Grape";
 
+        public string Icon { get; set; }
+
         public decimal Price { get; set; }
 
-        public Category Category { get; set; } = new Category();
+        public Category Category { get; set; }
 
-        public Subcategory Subcategory { get; set; } = new Subcategory();
+        public Subcategory Subcategory { get; set; }
     }
 }

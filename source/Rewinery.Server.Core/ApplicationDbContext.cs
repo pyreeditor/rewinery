@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Rewinery.Server.Core.Models;
 using Rewinery.Server.Core.Models.Comment;
+using Rewinery.Server.Core.Models.Orders;
 using Rewinery.Server.Core.Models.Wines;
 
 namespace Rewinery.Server.Core
@@ -34,6 +35,12 @@ namespace Rewinery.Server.Core
         public DbSet<ReceiptComment> ReceiptComments { get; set; }
 
         public DbSet<CommentResponse> CommentResponses { get; set; }
+        #endregion
+
+        #region order
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
         #endregion
     }
 }
