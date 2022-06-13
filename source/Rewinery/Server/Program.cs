@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models;
 using Microsoft.AspNetCore.Identity;
+using Rewinery.Server.Infrastructure;
+using Rewinery.Server.Infrastructure.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +24,18 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+
+builder.Services.AddScoped<SubcategoryRepository>();
+builder.Services.AddScoped<CategoryRepository>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddSwaggerGen();
+
+
 
 var app = builder.Build();
 

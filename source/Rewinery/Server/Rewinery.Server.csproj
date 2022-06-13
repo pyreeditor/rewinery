@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
@@ -15,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Rewinery.Server.Core\Rewinery.Server.Core.csproj" />
+    <ProjectReference Include="..\..\Rewinery.Server.Infrastructure\Rewinery.Server.Infrastructure.csproj" />
     <ProjectReference Include="..\Client\Rewinery.Client.csproj" />
     <ProjectReference Include="..\Shared\Rewinery.Shared.csproj" />
   </ItemGroup>

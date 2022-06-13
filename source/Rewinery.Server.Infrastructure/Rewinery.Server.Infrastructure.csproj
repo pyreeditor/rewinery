@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SupportedPlatform Include="browser" />
+    <ProjectReference Include="..\Rewinery.Server.Core\Rewinery.Server.Core.csproj" />
+    <ProjectReference Include="..\Rewinery\Shared\Rewinery.Shared.csproj" />
   </ItemGroup>
+
 </Project>
