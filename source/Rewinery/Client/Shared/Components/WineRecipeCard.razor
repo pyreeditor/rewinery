@@ -1,0 +1,34 @@
+﻿<div class="card">
+    <div class="card-top">
+        <div class="card-cover">
+            <img class="card-cover-img" src="/img/wine-bg-1.jpg">
+        </div>
+        <div class="card-section-button">
+            <button class="card-button">
+                <MudToggleIconButton @bind-Toggled="@AlarmOn"
+                                     Icon="@Icons.Filled.FavoriteBorder" Color="@Color.Default" Title="Favorite"
+                                     ToggledIcon="@Icons.Filled.Favorite" ToggledColor="@Color.Error" ToggledTitle="On" />
+            </button>
+            <button class="card-button">
+                <MudToggleIconButton @bind-Toggled="@AlarmOn"
+                                     Icon="@Icons.Filled.CompareArrows" Color="@Color.Default" Title="Compare"
+                                     ToggledIcon="@Icons.Filled.CompareArrows" ToggledColor="@Color.Warning" ToggledTitle="On" />
+            </button>
+            <button class="card-button">
+                <MudIconButton Icon="@Icons.Material.Filled.Share" Title="Share" />
+            </button>
+        </div>
+    </div>
+    <div class="card-down">
+        <div class="card-section-down">
+            <div class="card-text">
+                <div class="card-title"> Some wine</div>
+                <div class="card-description">Some info</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    public bool AlarmOn { get; set; }
+}
