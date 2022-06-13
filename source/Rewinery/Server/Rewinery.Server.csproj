@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Rewinery.Server.Core\Rewinery.Server.Core.csproj" />
     <ProjectReference Include="..\Client\Rewinery.Client.csproj" />
     <ProjectReference Include="..\Shared\Rewinery.Shared.csproj" />
   </ItemGroup>

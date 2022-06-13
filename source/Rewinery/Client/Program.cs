@@ -14,6 +14,10 @@ builder.Services.AddHttpClient("Rewinery.ServerAPI", client => client.BaseAddres
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Rewinery.ServerAPI"));
 
+builder.Services.AddScoped<AccountClaimsPrincipalFactory<RemoteUserAccount>, RolesClaimsPrincipalFactory>();
+builder.Services.AddApiAuthorization()
+    .AddAccountClaimsPrincipalFactory<RolesClaimsPrincipalFactory>();
+
 builder.Services.AddApiAuthorization();
 
 //MudBlazor

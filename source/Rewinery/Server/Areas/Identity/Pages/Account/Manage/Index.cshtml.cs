@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Rewinery.Server.Models;
+using Rewinery.Server.Core.Models;
 
 namespace Rewinery.Server.Areas.Identity.Pages.Account.Manage
 {
