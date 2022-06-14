@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{8232A7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{72A1320E-6C7B-48C0-8F04-689DBC6DB0E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rewinery.Server.Core", "Rewinery.Server.Core\Rewinery.Server.Core.csproj", "{51B63D0F-F531-45AE-B2E8-12EFBA2D7827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rewinery.Server.Core", "Rewinery.Server.Core\Rewinery.Server.Core.csproj", "{51B63D0F-F531-45AE-B2E8-12EFBA2D7827}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

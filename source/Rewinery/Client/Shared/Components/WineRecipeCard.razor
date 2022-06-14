@@ -5,12 +5,12 @@
         </div>
         <div class="card-section-button">
             <button class="card-button">
-                <MudToggleIconButton @bind-Toggled="@AlarmOn"
+                <MudToggleIconButton @bind-Toggled="@Liked"
                                      Icon="@Icons.Filled.FavoriteBorder" Color="@Color.Default" Title="Favorite"
                                      ToggledIcon="@Icons.Filled.Favorite" ToggledColor="@Color.Error" ToggledTitle="On" />
             </button>
             <button class="card-button">
-                <MudToggleIconButton @bind-Toggled="@AlarmOn"
+                <MudToggleIconButton @bind-Toggled="@Compared"
                                      Icon="@Icons.Filled.CompareArrows" Color="@Color.Default" Title="Compare"
                                      ToggledIcon="@Icons.Filled.CompareArrows" ToggledColor="@Color.Warning" ToggledTitle="On" />
             </button>
@@ -30,5 +30,6 @@
 </div>
 
 @code {
-    public bool AlarmOn { get; set; }
+    public bool Liked { get; set; }
+    public bool Compared { get; set; }
 }

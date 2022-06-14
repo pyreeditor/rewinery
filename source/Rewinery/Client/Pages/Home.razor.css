@@ -1,1 +1,60 @@
-﻿
+﻿.home-bg-animation {
+    background: linear-gradient(245deg, rgb(237, 123, 132), rgb(144, 85, 255), rgb(223, 152, 250), rgb(226, 51, 255), rgb(255, 107, 0)) 0% 0% / 500% 500%;
+    animation: AnimationName 14s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 9%
+    }
+
+    50% {
+        background-position: 100% 92%
+    }
+
+    100% {
+        background-position: 0% 9%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 9%
+    }
+
+    50% {
+        background-position: 100% 92%
+    }
+
+    100% {
+        background-position: 0% 9%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 9%
+    }
+
+    50% {
+        background-position: 100% 92%
+    }
+
+    100% {
+        background-position: 0% 9%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 9%
+    }
+
+    50% {
+        background-position: 100% 92%
+    }
+
+    100% {
+        background-position: 0% 9%
+    }
+}
