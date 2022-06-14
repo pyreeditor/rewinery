@@ -29,6 +29,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
 builder.Services.AddScoped<SubcategoryRepository>();
 builder.Services.AddScoped<CategoryRepository>();
+builder.Services.AddScoped<GrapeRepository>();
+builder.Services.AddScoped<IngredientRepository>();
+builder.Services.AddScoped<WineRepository>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

@@ -22,10 +22,16 @@ namespace Rewinery.Server.Controllers
             return await _categoryRepository.GetAsync(id);
         }
 
-        [HttpPost]
-        public async Task<string> CreateAsync(CategoryCreateDto category, string categoryName)
+        [HttpGet]
+        public async Task<IEnumerable<CategoryReadDto>> GetListAsync()
         {
-            return await _categoryRepository.CreateAsync(category, categoryName);
+            return await _categoryRepository.GetAllAsync();
+        }
+
+        [HttpPost]
+        public async Task<string> CreateAsync(CategoryCreateDto category)
+        {
+            return await _categoryRepository.CreateAsync(category);
         }
 
         [HttpDelete]

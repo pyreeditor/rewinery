@@ -2,7 +2,7 @@
 
 namespace Rewinery.Shared.Dtos.CategoriesDtos
 {
-    public class CategoryCreateDto : BaseDto
+    public class CategoryCreateDto
     {
         #pragma warning disable CS8618
         public string Name { get; set; }

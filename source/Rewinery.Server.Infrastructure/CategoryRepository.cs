@@ -23,10 +23,15 @@ namespace Rewinery.Server.Infrastructure
             return obj;
         }
 
-        public async Task<string> CreateAsync(CategoryCreateDto categoryobj, string categoryName)
+        public async Task<IEnumerable<CategoryReadDto>> GetAllAsync()
+        {
+            return _mapper.Map<IEnumerable<CategoryReadDto>>(await _ctx.Categories.ToListAsync());
+        }
+
+        public async Task<string> CreateAsync(CategoryCreateDto categoryobj)
         {
             var newcategory = _mapper.Map<Category>(categoryobj);
-            newcategory.Name = categoryName;
+            newcategory.Name = categoryobj.Name;
             await _ctx.Categories.AddAsync(newcategory);
             await _ctx.SaveChangesAsync();
             return newcategory.Id.ToString();
