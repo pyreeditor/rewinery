@@ -24,13 +24,13 @@ namespace Rewinery.Server.Infrastructure
 
         public async Task<WineReadDto> GetAsync(int id)
         {
-            var obj = _mapper.Map<WineReadDto>(await _ctx.Wines.FirstOrDefaultAsync(x => x.Id == id));
+            var obj = _mapper.Map<WineReadDto>(await _ctx.Wines.Include(x => x.Grape).ThenInclude(x => x.Category).FirstOrDefaultAsync(x => x.Id == id));
             return obj;
         }
 
         public async Task<IEnumerable<WineReadDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<WineReadDto>>(await _ctx.Wines.ToListAsync());
+            return _mapper.Map<IEnumerable<WineReadDto>>(await _ctx.Wines.Include(x => x.Grape).ThenInclude(x => x.Category).ToListAsync());
         }
         public async Task DeleteAsync(int id)
         {

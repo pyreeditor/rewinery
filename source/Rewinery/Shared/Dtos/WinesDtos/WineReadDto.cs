@@ -1,4 +1,5 @@
-﻿using Rewinery.Shared.Dtos.Base;
+﻿using AutoMapper;
+using Rewinery.Shared.Dtos.Base;
 using Rewinery.Shared.Dtos.IngredientsDtos;
 
 namespace Rewinery.Shared.Dtos.WinesDtos
@@ -12,7 +13,9 @@ namespace Rewinery.Shared.Dtos.WinesDtos
 
         public decimal Price { get; set; }
 
-        public int GrapeId { get; set; }
+        public string GrapeName { get; set; }
+        public string CategoryName { get; set; }
+        public string SubcategoryName { get; set; }
 
         public List<IngredientReadDto> Ingredients { get; set; }
 

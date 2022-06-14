@@ -24,7 +24,14 @@ namespace Rewinery.Server.Infrastructure.Mapping
             CreateMap<Ingredient, IngredientReadDto>();
             CreateMap<IngredientCreateDto, Ingredient>();
 
-            CreateMap<Wine, WineReadDto>();
+            CreateMap<Wine, WineReadDto>()
+                .ForMember(wineReadDto => wineReadDto.Id,
+                   opt => opt.MapFrom(wine => wine.Id))
+                .ForMember(wineReadDto => wineReadDto.GrapeName,
+                opt => opt.MapFrom(wine => wine.Grape.Name))
+                .ForMember(wineReadDto => wineReadDto.CategoryName,
+                opt => opt.MapFrom(wine => wine.Grape.Category.Name));
+            
             CreateMap<WineCreateDto, Wine>();
 
         }
