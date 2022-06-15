@@ -31,5 +31,21 @@ namespace Rewinery.Server.Infrastructure
                 .Include(x=>x.Owner)
                 .FirstOrDefaultAsync(x => x.Id == id));
         }
+
+        public async Task<IEnumerable<WineRecipeReadDto>> GetAllAsync()
+        {
+            return _mapper.Map<IEnumerable<WineRecipeReadDto>>(await _ctx.WineRecipes
+                .Include(x => x.Wine).ThenInclude(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Wine).ThenInclude(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Wine).ThenInclude(x => x.Ingredients)
+                //.Include(x => x.Comments)
+                .Include(x => x.Owner)
+                .ToListAsync());
+        }
+        public async Task DeleteAsync(int id)
+        {
+            _ctx.WineRecipes.Remove(_ctx.WineRecipes.Find(id));
+            await _ctx.SaveChangesAsync();
+        }
     }
 }
