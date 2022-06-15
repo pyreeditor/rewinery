@@ -15,29 +15,13 @@ namespace Rewinery.Shared.Dtos.WineRecipesDtos
     {
 #pragma warning disable CS8618
         
-        public string OwnerFirstName { get; set; }
-
-        public string OwnerLastName { get; set; }
-
-        public string OwnerUserName { get; set; }
+        public UserReadDto ApplicationUser { get; set; }
  
         public bool Public { get; set; }
 
         public string Icon { get; set; }
 
-        public string WineName { get; set; }
-
-        public string Description { get; set; }
-
-        public decimal Price { get; set; }
-
-        public string GrapeName { get; set; }
-
-        public string CategoryName { get; set; }
-
-        public string SubcategoryName { get; set; }
-
-        public List<IngredientReadDto> Ingredients { get; set; }
+        public WineReadDto Wine { get; set; }
 
         public List<RecipeCommentReadDto> Comments { get; set; }
 

@@ -20,10 +20,16 @@ namespace Rewinery.Server.Infrastructure
             _ctx = ctx;
             _mapper = mapper;
         }
-        
+
         public async Task<WineRecipeReadDto> GetAsync(int id)
         {
-            return _mapper.Map<WineRecipeReadDto>(await _ctx.WineRecipes.FirstOrDefaultAsync(x=>x.Id==id));
+            return _mapper.Map<WineRecipeReadDto>(await _ctx.WineRecipes
+                .Include(x => x.Wine).ThenInclude(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Wine).ThenInclude(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Wine).ThenInclude(x => x.Ingredients)
+                //.Include(x => x.Comments)
+                .Include(x=>x.Owner)
+                .FirstOrDefaultAsync(x => x.Id == id));
         }
     }
 }
