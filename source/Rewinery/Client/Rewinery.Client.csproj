@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Rewinery.Client.Infractructure\Rewinery.Client.Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Rewinery.Shared.csproj" />
   </ItemGroup>
 

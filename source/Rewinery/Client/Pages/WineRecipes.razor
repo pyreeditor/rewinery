@@ -1,7 +1,11 @@
 ﻿@page "/wine-recipes"
 @using Rewinery.Client.Shared.Components
+@using Rewinery.Client.Infrastructure
+@using Rewinery.Shared.Dtos.WinesDtos
 
-<div class="wine-recipes-bg-animation" style="height: fit-content; width: 100%;">
+@inject HttpCategoriesRepository _httpCategories
+
+<div class="wine-recipes-bg-animation" style="min-height: 100vh; height: fit-content; width: 100%;">
     <div class="row" style="--bs-gutter-x: unset;">
         <div class="col-3">
             <div class="container overflow-hidden wr-pt">
@@ -11,49 +15,34 @@
         <div class="col-9">
             <div class="container overflow-hidden wr-pt">
                 <div class="row gy-5 wr-mb">
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
-                    <div class="col-4">
-                        <WineRecipeCard />
-                    </div>
+                    @if (recipes != null)
+                    {
+                        @foreach (var recipe in recipes)
+                        {
+                            <div class="col-4">
+                                <WineRecipeCard wine="recipe" />
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            <MudPagination Variant="Variant.Outlined" BoundaryCount="1" MiddleCount="3" Count="15" Class="pb-5" />
-        </div>
-        <div class="d-flex justify-content-between wr-bottom px-5">
-            <div>©  Rewinery 2022</div>
-            <div></div>
-            <div>Powered by reeditor, nzrjed</div>
-        </div>
+    </div>
+    <div class="d-flex justify-content-center pb-10">
+        <MudPagination Variant="Variant.Outlined" BoundaryCount="1" MiddleCount="3" Count="15" Class="pb-5" />
+    </div>
+    <div class="d-flex justify-content-between wr-bottom px-5 fix-bottom">
+        <div>©  Rewinery 2022</div>
+        <div></div>
+        <div>Powered by reeditor, nzrjed</div>
     </div>
 </div>
+
+@code {
+    public IEnumerable<WineReadDto>? recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await _httpCategories.GetAllAsync();
+    }
+}
