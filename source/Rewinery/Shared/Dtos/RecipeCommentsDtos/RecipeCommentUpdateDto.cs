@@ -9,17 +9,13 @@ namespace Rewinery.Shared.Dtos.RecipeCommentsDtos
 {
     public class RecipeCommentUpdateDto : BaseDto
     {
-        public int UserId { get; set; }
-
+        public string UserName { get; set; }
 
         public int RecipeId { get; set; }
 
-
         public string? Comment { get; set; }
 
-
         public int Rating { get; set; }
-
 
         public List<int> ResponsesIds { get; set; }
     }

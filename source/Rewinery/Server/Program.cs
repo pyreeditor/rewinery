@@ -32,6 +32,7 @@ builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<GrapeRepository>();
 builder.Services.AddScoped<IngredientRepository>();
 builder.Services.AddScoped<WineRepository>();
+builder.Services.AddScoped<WineRecipeRepository>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

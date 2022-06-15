@@ -28,7 +28,7 @@ namespace Rewinery.Server.Core.Models.Comment
         /// <summary>
         /// Collection of responces to this comment
         /// </summary>
-        public ICollection<CommentResponse> Responses { get; set; }
+        public ICollection<CommentResponse>? Responses { get; set; }
         #pragma warning restore CS8618
     }
 }
