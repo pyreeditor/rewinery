@@ -30,7 +30,7 @@ namespace Rewinery.Server.Core.Models
         /// <summary>
         /// Collection of the comment to this recipe
         /// </summary>
-        public ICollection<RecipeComment> Comments { get; set; }
+        public ICollection<RecipeComment>? Comments { get; set; }
         #pragma warning restore CS8618
     }
 }

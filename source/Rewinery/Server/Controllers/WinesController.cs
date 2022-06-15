@@ -11,9 +11,9 @@ namespace Rewinery.Server.Controllers
     {
         private readonly WineRepository _wineRepository;
 
-        public WinesController(WineRepository ingredientRepository)
+        public WinesController(WineRepository wineRepository)
         {
-            _wineRepository = ingredientRepository;
+            _wineRepository = wineRepository;
         }
 
         [Route("/api/wines/{id}")]

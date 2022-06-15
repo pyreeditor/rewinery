@@ -10,7 +10,7 @@ namespace Rewinery.Shared.Dtos.RecipeCommentsDtos
     {
 #pragma warning disable CS8618
 
-        public int UserId { get; set; }
+        public string UserName { get; set; }
 
 
         public int RecipeId { get; set; }
