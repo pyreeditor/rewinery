@@ -41,32 +41,7 @@ namespace Rewinery.Server.Infrastructure.Mapping
 
             CreateMap<ApplicationUser, UserReadDto>();
 
-            CreateMap<WineRecipe, WineRecipeReadDto>()
-                .ForMember(winerecipeReadDto => winerecipeReadDto.Id,
-                opt => opt.MapFrom(winerecipe => winerecipe.Id))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.OwnerFirstName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Owner.FirstName))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.OwnerLastName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Owner.LastName))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.OwnerUserName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Owner.UserName))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.Icon,
-                opt => opt.MapFrom(winerecipe => winerecipe.Icon))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.Public,
-                opt => opt.MapFrom(winerecipe => winerecipe.Public))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.Price,
-                opt => opt.MapFrom(winerecipe => winerecipe.Wine.Price))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.CategoryName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Wine.Grape.Category.Name))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.SubcategoryName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Wine.Grape.Subcategory.Name))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.GrapeName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Wine.Grape.Name))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.Description,
-                opt => opt.MapFrom(winerecipe => winerecipe.Wine.Description))
-                .ForMember(winerecipeReadDto => winerecipeReadDto.WineName,
-                opt => opt.MapFrom(winerecipe => winerecipe.Wine.Name))
-                ;
+            CreateMap<WineRecipe, WineRecipeReadDto>();
 
 
         }
