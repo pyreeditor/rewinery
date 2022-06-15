@@ -1,9 +1,7 @@
 ﻿.frozen-glass {
-    position: relative;
-    top: 52.5%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    margin-left: 1.5%;
+    position: absolute;
+    margin-top: 6%;
     background: inherit;
     overflow: hidden;
     border-radius: 16px;
@@ -13,7 +11,7 @@
 
     .frozen-glass:before {
         content: '';
-        position: absolute;
+        position: relative;
         background: inherit;
         top: 0;
         left: 0;
