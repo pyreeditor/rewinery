@@ -1,4 +1,40 @@
-﻿<h3>WineRecipeFilters</h3>
+﻿<div class="filter-bar">
+    <MudList Clickable="true">
+        <MudListSubheader>
+            Wine filter
+        </MudListSubheader>
+        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Wine type" InitiallyExpanded="true">
+            <NestedList>
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    Starred
+                </MudListItem>
+                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
+                    Snoozed
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Wine variety" InitiallyExpanded="true">
+            <NestedList>
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    Starred
+                </MudListItem>
+                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
+                    Snoozed
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Ingradient" InitiallyExpanded="true">
+            <NestedList>
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    Starred
+                </MudListItem>
+                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
+                    Snoozed
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+</div>
 
 @code {
 
