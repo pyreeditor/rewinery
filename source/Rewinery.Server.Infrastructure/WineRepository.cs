@@ -46,7 +46,7 @@ namespace Rewinery.Server.Infrastructure
             await _ctx.SaveChangesAsync();
         }
 
-        public async Task<Wine> CreateAsync(WineCreateDto wineobj)
+        public async Task<int> CreateAsync(WineCreateDto wineobj)
         {
             var newwine = _mapper.Map<Wine>(wineobj);
             newwine.Name = wineobj.Name;
@@ -64,7 +64,7 @@ namespace Rewinery.Server.Infrastructure
             newwine.Ingredients = temping;
             await _ctx.Wines.AddAsync(newwine);
             await _ctx.SaveChangesAsync();
-            return newwine;
+            return newwine.Id;
         }
     }
 }

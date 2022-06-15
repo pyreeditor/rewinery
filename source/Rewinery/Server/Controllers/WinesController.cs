@@ -29,9 +29,9 @@ namespace Rewinery.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<Wine> CreateAsync(WineCreateDto ingredient)
+        public async Task<int> CreateAsync(WineCreateDto wine)
         {
-            return await _wineRepository.CreateAsync(ingredient);
+            return await _wineRepository.CreateAsync(wine);
         }
 
         [HttpDelete]
