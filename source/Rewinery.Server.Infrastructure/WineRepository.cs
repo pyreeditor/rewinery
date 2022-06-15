@@ -24,13 +24,21 @@ namespace Rewinery.Server.Infrastructure
 
         public async Task<WineReadDto> GetAsync(int id)
         {
-            var obj = _mapper.Map<WineReadDto>(await _ctx.Wines.Include(x => x.Grape).ThenInclude(x => x.Category).FirstOrDefaultAsync(x => x.Id == id));
-            return obj;
+            return _mapper.Map<WineReadDto>(await _ctx.Wines
+                .Include(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x=>x.Grape).ThenInclude(x=>x.Subcategory)
+                .Include(x=>x.Ingredients)
+                .FirstOrDefaultAsync(x => x.Id == id));
+            
         }
 
         public async Task<IEnumerable<WineReadDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<WineReadDto>>(await _ctx.Wines.Include(x => x.Grape).ThenInclude(x => x.Category).ToListAsync());
+            return _mapper.Map<IEnumerable<WineReadDto>>(await _ctx.Wines
+                .Include(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Ingredients)
+                .ToListAsync());
         }
         public async Task DeleteAsync(int id)
         {
@@ -54,7 +62,7 @@ namespace Rewinery.Server.Infrastructure
                 newwine.Price += ing.Price;
             }
             newwine.Ingredients = temping;
-
+            await _ctx.Wines.AddAsync(newwine);
             await _ctx.SaveChangesAsync();
             return newwine;
         }

@@ -30,7 +30,9 @@ namespace Rewinery.Server.Infrastructure.Mapping
                 .ForMember(wineReadDto => wineReadDto.GrapeName,
                 opt => opt.MapFrom(wine => wine.Grape.Name))
                 .ForMember(wineReadDto => wineReadDto.CategoryName,
-                opt => opt.MapFrom(wine => wine.Grape.Category.Name));
+                opt => opt.MapFrom(wine => wine.Grape.Category.Name))
+                .ForMember(wineReadDto => wineReadDto.SubcategoryName,
+                opt => opt.MapFrom(wine => wine.Grape.Subcategory.Name));
             
             CreateMap<WineCreateDto, Wine>();
 
