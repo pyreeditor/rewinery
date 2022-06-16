@@ -32,16 +32,6 @@ namespace Rewinery.Server.Core.Models.Wines
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Category name (red, white, pink)
-        /// </summary>
-        public Category Category { get; set; }
-
-        /// <summary>
-        /// Subcategory name (dry, sweet, semi-sweet...)
-        /// </summary>
-        public Subcategory Subcategory { get; set; }
-
-        /// <summary>
         /// Information about grape used in wine
         /// </summary>
         public Grape Grape { get; set; }

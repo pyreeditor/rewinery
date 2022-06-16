@@ -673,6 +673,9 @@ namespace Rewinery.Server.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Icon")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -684,7 +687,14 @@ namespace Rewinery.Server.Core.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("SubcategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SubcategoryId");
 
                     b.ToTable("Grapes");
                 });
@@ -738,9 +748,6 @@ namespace Rewinery.Server.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -765,18 +772,11 @@ namespace Rewinery.Server.Core.Migrations
                     b.Property<bool>("Public")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SubcategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("GrapeId");
 
                     b.HasIndex("OwnerId");
-
-                    b.HasIndex("SubcategoryId");
 
                     b.ToTable("Wines");
                 });
@@ -972,7 +972,7 @@ namespace Rewinery.Server.Core.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Wines.Wine", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Wines.Grape", b =>
                 {
                     b.HasOne("Rewinery.Server.Core.Models.Wines.Category", "Category")
                         .WithMany()
@@ -980,6 +980,19 @@ namespace Rewinery.Server.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Rewinery.Server.Core.Models.Wines.Subcategory", "Subcategory")
+                        .WithMany()
+                        .HasForeignKey("SubcategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Subcategory");
+                });
+
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Wines.Wine", b =>
+                {
                     b.HasOne("Rewinery.Server.Core.Models.Wines.Grape", "Grape")
                         .WithMany()
                         .HasForeignKey("GrapeId")
@@ -990,19 +1003,9 @@ namespace Rewinery.Server.Core.Migrations
                         .WithMany("Wines")
                         .HasForeignKey("OwnerId");
 
-                    b.HasOne("Rewinery.Server.Core.Models.Wines.Subcategory", "Subcategory")
-                        .WithMany()
-                        .HasForeignKey("SubcategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
                     b.Navigation("Grape");
 
                     b.Navigation("Owner");
-
-                    b.Navigation("Subcategory");
                 });
 
             modelBuilder.Entity("Rewinery.Server.Core.Models.ApplicationUser", b =>

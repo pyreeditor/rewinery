@@ -97,21 +97,6 @@ namespace Rewinery.Server.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Grapes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Grapes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ingredients",
                 columns: table => new
                 {
@@ -318,43 +303,28 @@ namespace Rewinery.Server.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Wines",
+                name: "Grapes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    SubcategoryId = table.Column<int>(type: "int", nullable: false),
-                    GrapeId = table.Column<int>(type: "int", nullable: false),
-                    Public = table.Column<bool>(type: "bit", nullable: false)
+                    SubcategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wines", x => x.Id);
+                    table.PrimaryKey("PK_Grapes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Wines_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Wines_Categories_CategoryId",
+                        name: "FK_Grapes_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Wines_Grapes_GrapeId",
-                        column: x => x.GrapeId,
-                        principalTable: "Grapes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Wines_Subcategories_SubcategoryId",
+                        name: "FK_Grapes_Subcategories_SubcategoryId",
                         column: x => x.SubcategoryId,
                         principalTable: "Subcategories",
                         principalColumn: "Id",
@@ -386,6 +356,63 @@ namespace Rewinery.Server.Core.Migrations
                         principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Wines",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    GrapeId = table.Column<int>(type: "int", nullable: false),
+                    Public = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wines", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Wines_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Wines_Grapes_GrapeId",
+                        column: x => x.GrapeId,
+                        principalTable: "Grapes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AnswerResponces",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AnswerId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ResponceText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnswerResponces", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnswerResponces_Answers_AnswerId",
+                        column: x => x.AnswerId,
+                        principalTable: "Answers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnswerResponces_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -507,33 +534,6 @@ namespace Rewinery.Server.Core.Migrations
                         principalTable: "Wines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AnswerResponces",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AnswerId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ResponceText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AnswerResponces", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AnswerResponces_Answers_AnswerId",
-                        column: x => x.AnswerId,
-                        principalTable: "Answers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AnswerResponces_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -659,6 +659,16 @@ namespace Rewinery.Server.Core.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Grapes_CategoryId",
+                table: "Grapes",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Grapes_SubcategoryId",
+                table: "Grapes",
+                column: "SubcategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IngredientWine_WineId",
                 table: "IngredientWine",
                 column: "WineId");
@@ -719,11 +729,6 @@ namespace Rewinery.Server.Core.Migrations
                 column: "WineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Wines_CategoryId",
-                table: "Wines",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Wines_GrapeId",
                 table: "Wines",
                 column: "GrapeId");
@@ -732,11 +737,6 @@ namespace Rewinery.Server.Core.Migrations
                 name: "IX_Wines_OwnerId",
                 table: "Wines",
                 column: "OwnerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Wines_SubcategoryId",
-                table: "Wines",
-                column: "SubcategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -808,10 +808,10 @@ namespace Rewinery.Server.Core.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Grapes");
 
             migrationBuilder.DropTable(
-                name: "Grapes");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Subcategories");
