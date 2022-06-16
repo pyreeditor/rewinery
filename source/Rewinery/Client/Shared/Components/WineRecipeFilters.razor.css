@@ -1,5 +1,5 @@
 ﻿.filter-bar {
-    width: 300px;
+    width: 320px;
     min-height: 600px;
     background-color: unset;
     color: unset;
@@ -9,5 +9,4 @@
     padding: 0px;
     margin-left: 15px;
     margin-bottom:30px;
-    position:fixed;
 }

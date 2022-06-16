@@ -1,41 +1,32 @@
 ﻿<div class="filter-bar">
-    <MudList Clickable="true">
-        <MudListSubheader>
-            Wine filter
-        </MudListSubheader>
-        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Wine type" InitiallyExpanded="true">
-            <NestedList>
-                <MudListItem Icon="@Icons.Material.Filled.StarRate">
-                    Starred
-                </MudListItem>
-                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
-                    Snoozed
-                </MudListItem>
-            </NestedList>
-        </MudListItem>
-        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Wine variety" InitiallyExpanded="true">
-            <NestedList>
-                <MudListItem Icon="@Icons.Material.Filled.StarRate">
-                    Starred
-                </MudListItem>
-                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
-                    Snoozed
-                </MudListItem>
-            </NestedList>
-        </MudListItem>
-        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Ingradient" InitiallyExpanded="true">
-            <NestedList>
-                <MudListItem Icon="@Icons.Material.Filled.StarRate">
-                    Starred
-                </MudListItem>
-                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
-                    Snoozed
-                </MudListItem>
-            </NestedList>
-        </MudListItem>
+    <MudList Clickable="true" Style="width: 80%; margin-left: 10%; padding-top: 10%">
+        <MudSelect T="string" Label="Wine type" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options" Class="pb-10">
+            @foreach (var state in states)
+            {
+                <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+            }
+        </MudSelect>
+        <MudSelect T="string" Label="Wine variety" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options" Class="pb-10">
+            @foreach (var state in states)
+            {
+                <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+            }
+        </MudSelect>
+        <MudSelect T="string" Label="Ingredients" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options" Class="pb-10">
+            @foreach (var state in states)
+            {
+                <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+            }
+        </MudSelect>
     </MudList>
 </div>
 
 @code {
+    private string value { get; set; }
+    private IEnumerable<string> options { get; set; } = new HashSet<string>();
 
+    private string[] states =
+    {
+        "test1", "test2", "test3", "test4", "test5"
+    };
 }
