@@ -26,10 +26,10 @@ namespace Rewinery.Server.Infrastructure
         {
             return _mapper.Map<WineReadDto>(await _ctx.Wines
                 .Include(x => x.Grape).ThenInclude(x => x.Category)
-                .Include(x=>x.Grape).ThenInclude(x=>x.Subcategory)
-                .Include(x=>x.Ingredients)
+                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Ingredients)
                 .FirstOrDefaultAsync(x => x.Id == id));
-            
+
         }
 
         public async Task<IEnumerable<WineReadDto>> GetAllAsync()
@@ -52,8 +52,8 @@ namespace Rewinery.Server.Infrastructure
             newwine.Name = wineobj.Name;
             newwine.Description = wineobj.Description;
             newwine.Grape = _ctx.Grapes.Find(wineobj.GrapeId);
-            newwine.Price = _ctx.Grapes.Find(wineobj.GrapeId).Price;
-            List<Ingredient> temping=new List<Ingredient>();
+
+            List<Ingredient> temping = new List<Ingredient>();
 
             foreach (var item in wineobj.IngredientsIds)
             {
@@ -65,6 +65,26 @@ namespace Rewinery.Server.Infrastructure
             await _ctx.Wines.AddAsync(newwine);
             await _ctx.SaveChangesAsync();
             return newwine.Id;
+        }
+        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
+        {
+            var wine = _ctx.Wines.Find(wineobj.Id);
+            wine.Name = wineobj.Name;
+            wine.Description = wineobj.Description;
+            wine.Grape = _ctx.Grapes.Find(wineobj.GrapeId);
+            wine.Price = _ctx.Grapes.Find(wineobj.GrapeId).Price;
+
+            List<Ingredient> temping = new List<Ingredient>();
+            foreach (var item in wineobj.IngredientsIds)
+            {
+                var ing = _ctx.Ingredients.Find(item);
+                temping.Add(ing);
+                wine.Price += ing.Price;
+            }
+
+            wine.Ingredients = temping;
+            await _ctx.SaveChangesAsync();
+            return wine.Id;
         }
     }
 }

@@ -21,5 +21,17 @@ namespace Rewinery.Server.Controllers
         {
             return await _wineRecipeRepository.GetAsync(id);
         }
+
+        [HttpGet]
+        public async Task<IEnumerable<WineRecipeReadDto>> GetListAsync()
+        {
+            return await _wineRecipeRepository.GetAllAsync();
+        }
+        [HttpDelete]
+        public async Task<int> DeleteAsync(int id)
+        {
+            await _wineRecipeRepository.DeleteAsync(id);
+            return id;
+        }
     }
 }

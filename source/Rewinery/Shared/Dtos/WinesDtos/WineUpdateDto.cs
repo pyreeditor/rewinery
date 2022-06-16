@@ -14,7 +14,7 @@ namespace Rewinery.Shared.Dtos.WinesDtos
 
         public int GrapeId { get; set; }
 
-        public List<IngredientReadDto> Ingredients { get; set; }
+        public List<int> IngredientsIds { get; set; }
 
 #pragma warning restore CS8618
     }

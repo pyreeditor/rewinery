@@ -28,7 +28,7 @@ namespace Rewinery.Server.Core.Models.Wines
         /// <summary>
         /// Ingredient used in wine
         /// </summary>
-        public ICollection<Ingredient> Ingredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
         #pragma warning restore CS8618
     }
 }

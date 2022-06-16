@@ -40,5 +40,12 @@ namespace Rewinery.Server.Controllers
             await _wineRepository.DeleteAsync(id);
             return id;
         }
+
+        [HttpPut]
+        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
+        {
+            await _wineRepository.UpdateAsync(wineobj);
+            return wineobj.Id;
+        }
     }
 }
