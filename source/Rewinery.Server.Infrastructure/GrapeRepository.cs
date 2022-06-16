@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.Dtos.GrapesDtos;
+using Rewinery.Shared.WineGroup.GrapesDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

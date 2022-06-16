@@ -1,8 +1,6 @@
-﻿using Rewinery.Shared.Dtos.Base;
-
-namespace Rewinery.Shared.Dtos.GrapesDtos
+﻿namespace Rewinery.Shared.WineGroup.GrapesDtos
 {
-    public class GrapeUpdateDto : BaseDto
+    public class GrapeCreateDto
     {
         public string Name { get; set; }
 
@@ -11,7 +9,6 @@ namespace Rewinery.Shared.Dtos.GrapesDtos
         public decimal Price { get; set; }
 
         public int CategoryId { get; set; }
-
         public int SubcategoryId { get; set; }
     }
 }

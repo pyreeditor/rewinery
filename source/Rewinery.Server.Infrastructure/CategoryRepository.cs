@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.Dtos.CategoriesDtos;
+using Rewinery.Shared.WineGroup.CategoriesDtos;
 
 namespace Rewinery.Server.Infrastructure
 {

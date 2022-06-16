@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Rewinery.Server.Core.Models;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.Dtos.CategoriesDtos;
-using Rewinery.Shared.Dtos.GrapesDtos;
-using Rewinery.Shared.Dtos.IngredientsDtos;
-using Rewinery.Shared.Dtos.SubcategoriesDtos;
-using Rewinery.Shared.Dtos.UsersDtos;
-using Rewinery.Shared.Dtos.WinesDtos;
+using Rewinery.Shared;
+using Rewinery.Shared.WineGroup.CategoriesDtos;
+using Rewinery.Shared.WineGroup.GrapesDtos;
+using Rewinery.Shared.WineGroup.IngredientsDtos;
+using Rewinery.Shared.WineGroup.SubcategoriesDtos;
+using Rewinery.Shared.WineGroup.WinesDtos;
 
 namespace Rewinery.Server.Infrastructure.Mapping
 {

@@ -1,6 +1,4 @@
-﻿using Rewinery.Shared.Dtos.Base;
-
-namespace Rewinery.Shared.Dtos.SubcategoriesDtos
+﻿namespace Rewinery.Shared.WineGroup.SubcategoriesDtos
 {
     public class SubcategoryCreateDto : BaseDto
     {

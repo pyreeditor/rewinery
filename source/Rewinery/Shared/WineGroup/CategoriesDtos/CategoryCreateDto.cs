@@ -1,8 +1,6 @@
-﻿using Rewinery.Shared.Dtos.Base;
-
-namespace Rewinery.Shared.Dtos.SubcategoriesDtos
+﻿namespace Rewinery.Shared.WineGroup.CategoriesDtos
 {
-    public class SubcategoryUpdateDto : BaseDto
+    public class CategoryCreateDto
     {
         #pragma warning disable CS8618
         public string Name { get; set; }

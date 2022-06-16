@@ -1,4 +1,4 @@
-﻿using Rewinery.Shared.Dtos.WinesDtos;
+﻿using Rewinery.Shared.WineGroup.WinesDtos;
 using System.Net.Http.Json;
 
 namespace Rewinery.Client.Infrastructure

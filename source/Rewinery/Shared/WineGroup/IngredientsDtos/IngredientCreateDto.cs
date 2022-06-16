@@ -1,13 +1,12 @@
-﻿using Rewinery.Shared.Dtos.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rewinery.Shared.Dtos.IngredientsDtos
+namespace Rewinery.Shared.WineGroup.IngredientsDtos
 {
-    public class IngredientReadDto : BaseDto
+    public class IngredientCreateDto
     {
         #pragma warning disable CS8618
         public string Name { get; set; }
@@ -17,6 +16,5 @@ namespace Rewinery.Shared.Dtos.IngredientsDtos
         public decimal Price { get; set; }
 
         #pragma warning restore CS8618
-
     }
 }

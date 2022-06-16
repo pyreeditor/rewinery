@@ -1,7 +1,6 @@
-﻿using Rewinery.Shared.Dtos.Base;
-using Rewinery.Shared.Dtos.IngredientsDtos;
+﻿using Rewinery.Shared.WineGroup.IngredientsDtos;
 
-namespace Rewinery.Shared.Dtos.WinesDtos
+namespace Rewinery.Shared.WineGroup.WinesDtos
 {
     public class WineUpdateDto : BaseDto
     {

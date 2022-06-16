@@ -1,8 +1,7 @@
-﻿using Rewinery.Shared.Dtos.Base;
-using Rewinery.Shared.Dtos.CategoriesDtos;
-using Rewinery.Shared.Dtos.SubcategoriesDtos;
+﻿using Rewinery.Shared.WineGroup.CategoriesDtos;
+using Rewinery.Shared.WineGroup.SubcategoriesDtos;
 
-namespace Rewinery.Shared.Dtos.GrapesDtos
+namespace Rewinery.Shared.WineGroup.GrapesDtos
 {
     public class GrapeReadDto : BaseDto
     {

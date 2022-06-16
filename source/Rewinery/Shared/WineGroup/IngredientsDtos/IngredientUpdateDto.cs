@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rewinery.Shared.Dtos.IngredientsDtos
+namespace Rewinery.Shared.WineGroup.IngredientsDtos
 {
-    public class IngredientCreateDto
+    public class IngredientUpdateDto : BaseDto
     {
         #pragma warning disable CS8618
         public string Name { get; set; }
@@ -16,5 +16,6 @@ namespace Rewinery.Shared.Dtos.IngredientsDtos
         public decimal Price { get; set; }
 
         #pragma warning restore CS8618
+
     }
 }

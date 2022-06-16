@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rewinery.Server.Infrastructure;
-using Rewinery.Shared.Dtos.CategoriesDtos;
+using Rewinery.Shared.WineGroup.CategoriesDtos;
 
 namespace Rewinery.Server.Controllers
 {
