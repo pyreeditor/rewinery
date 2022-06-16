@@ -27,7 +27,7 @@
             <div class="card-section-down">
                 <div class="card-text">
                     <div class="card-title">@wine.Name</div>
-                    <div class="card-description">@wine.SubcategoryName</div>
+                    <div class="card-description">@wine.Icon</div>
                 </div>
             </div>
         </div>
@@ -39,5 +39,5 @@
     public bool Compared { get; set; }
 
     [Parameter]
-    public WineReadDto? wine { get; set; }
+    public WineRecipePageReadDto? wine { get; set; }
 }

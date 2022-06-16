@@ -9,11 +9,11 @@ namespace Rewinery.Shared.WineGroup.WinesDtos
 
         public string Description { get; set; }
 
-        public decimal Price { get; set; }
-
         public int GrapeId { get; set; }
 
-        public List<int> IngredientsIds { get; set; }
+        public string Icon { get; set; }
+
+        public bool Public { get; set; }
 
 #pragma warning restore CS8618
     }

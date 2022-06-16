@@ -26,7 +26,7 @@ namespace Rewinery.Server.Infrastructure.Mapping
             CreateMap<Ingredient, IngredientReadDto>();
             CreateMap<IngredientCreateDto, Ingredient>();
 
-            CreateMap<Wine, WineReadDto>();
+            CreateMap<Wine, WineRecipePageReadDto>();
 
             CreateMap<WineCreateDto, Wine>();
 

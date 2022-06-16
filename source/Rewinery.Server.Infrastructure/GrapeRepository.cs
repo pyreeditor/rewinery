@@ -40,11 +40,13 @@ namespace Rewinery.Server.Infrastructure
             await _ctx.SaveChangesAsync();
             return newgrape.Id.ToString();
         }
+
         public async Task DeleteAsync(int id)
         {
             _ctx.Grapes.Remove(_ctx.Grapes.Find(id));
             await _ctx.SaveChangesAsync();
         }
+
         public async Task UpdateAsync(GrapeUpdateDto grapeobj)
         {
             var grape = _ctx.Grapes.Find(grapeobj.Id);
@@ -53,5 +55,6 @@ namespace Rewinery.Server.Infrastructure
             grape.Price = grapeobj.Price;
             await _ctx.SaveChangesAsync();
         }
+
     }
 }

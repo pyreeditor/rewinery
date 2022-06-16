@@ -18,12 +18,12 @@ namespace Rewinery.Server.Controllers
 
         [Route("/api/wines/{id}")]
         [HttpGet]
-        public async Task<WineReadDto> GetAsync(int id)
+        public async Task<WineRecipePageReadDto> GetAsync(int id)
         {
             return await _wineRepository.GetAsync(id);
         }
         [HttpGet]
-        public async Task<IEnumerable<WineReadDto>> GetListAsync()
+        public async Task<IEnumerable<WineRecipePageReadDto>> GetListAsync()
         {
             return await _wineRepository.GetAllAsync();
         }
@@ -41,11 +41,11 @@ namespace Rewinery.Server.Controllers
             return id;
         }
 
-        [HttpPut]
-        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
-        {
-            await _wineRepository.UpdateAsync(wineobj);
-            return wineobj.Id;
-        }
+        //[HttpPut]
+        //public async Task<int> UpdateAsync(WineUpdateDto wineobj)
+        //{
+        //    await _wineRepository.UpdateAsync(wineobj);
+        //    return wineobj.Id;
+        //}
     }
 }

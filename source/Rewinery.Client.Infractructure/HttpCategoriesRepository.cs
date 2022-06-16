@@ -7,9 +7,9 @@ namespace Rewinery.Client.Infrastructure
     {
         public HttpCategoriesRepository(HttpClient httpClient) : base(httpClient) { }
 
-        public async Task<IEnumerable<WineReadDto>> GetAllAsync()
+        public async Task<IEnumerable<WineRecipePageReadDto>> GetAllAsync()
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<WineReadDto>>($"/api/wines");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<WineRecipePageReadDto>>($"/api/wines");
         }
     }
 }

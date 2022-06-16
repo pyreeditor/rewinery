@@ -12,8 +12,8 @@ using Rewinery.Server.Core;
 namespace Rewinery.Server.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220616174214_Init")]
-    partial class Init
+    [Migration("20220616184307_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
