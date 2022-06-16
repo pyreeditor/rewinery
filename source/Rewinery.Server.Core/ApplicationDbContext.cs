@@ -6,6 +6,7 @@ using Rewinery.Server.Core.Models;
 using Rewinery.Server.Core.Models.Cellar;
 using Rewinery.Server.Core.Models.Comment;
 using Rewinery.Server.Core.Models.Orders;
+using Rewinery.Server.Core.Models.Topics;
 using Rewinery.Server.Core.Models.Wines;
 
 namespace Rewinery.Server.Core
@@ -20,8 +21,6 @@ namespace Rewinery.Server.Core
         }
         #pragma warning restore CS8618
 
-        public DbSet<WineRecipe> WineRecipes { get; set; }
-
         #region wine
         public DbSet<Wine> Wines { get; set; }
 
@@ -35,7 +34,7 @@ namespace Rewinery.Server.Core
         #endregion
 
         #region comment
-        public DbSet<RecipeComment> RecipeComments { get; set; }
+        public DbSet<WineComment> WineComments { get; set; }
 
         public DbSet<CommentResponse> CommentResponses { get; set; }
         #endregion
@@ -50,6 +49,14 @@ namespace Rewinery.Server.Core
         public DbSet<Cellar> Cellars { get; set; }
 
         public DbSet<CellarRental> CellarRentals { get; set; }
+        #endregion
+
+        #region topic
+        public DbSet<Topic> Topics { get; set; }
+
+        public DbSet<Answer> Answers { get; set; }
+
+        public DbSet<AnswerResponce> AnswerResponces { get; set; }
         #endregion
     }
 }

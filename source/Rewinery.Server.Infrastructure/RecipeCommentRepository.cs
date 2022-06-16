@@ -21,9 +21,5 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        public async Task<RecipeCommentReadDto> GetAsync(int id)
-        {
-            return _mapper.Map<RecipeCommentReadDto>(_ctx.RecipeComments.Include(x=>x.User).Include(x=>x.Recipe).Include(x=>x.Responses));
-        }
     }
 }

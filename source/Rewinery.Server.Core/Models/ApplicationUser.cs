@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+using Rewinery.Server.Core.Models.Wines;
+using Rewinery.Server.Core.Models.Topics;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rewinery.Server.Core.Models
@@ -25,6 +26,8 @@ namespace Rewinery.Server.Core.Models
         /// <summary>
         /// Collection of user-owned wine recipes
         /// </summary>
-        public ICollection<WineRecipe>? WineReceipts { get; set; }
+        public ICollection<Wine>? Wines { get; set; }
+
+        public ICollection<Topic>? Topics { get; set; }
     }
 }

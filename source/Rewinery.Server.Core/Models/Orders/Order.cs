@@ -1,9 +1,5 @@
 ﻿using Rewinery.Server.Core.Models.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rewinery.Server.Core.Models.Wines;
 
 namespace Rewinery.Server.Core.Models.Orders
 {
@@ -12,7 +8,7 @@ namespace Rewinery.Server.Core.Models.Orders
         #pragma warning disable CS8618
         public ApplicationUser User { get; set; }
 
-        public WineRecipe Wine { get; set; }
+        public Wine Wine { get; set; }
 
         public int Volume { get; set; }
 

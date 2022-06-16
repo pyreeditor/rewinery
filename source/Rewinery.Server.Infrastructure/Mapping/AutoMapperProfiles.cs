@@ -6,7 +6,6 @@ using Rewinery.Shared.Dtos.GrapesDtos;
 using Rewinery.Shared.Dtos.IngredientsDtos;
 using Rewinery.Shared.Dtos.SubcategoriesDtos;
 using Rewinery.Shared.Dtos.UsersDtos;
-using Rewinery.Shared.Dtos.WineRecipesDtos;
 using Rewinery.Shared.Dtos.WinesDtos;
 
 namespace Rewinery.Server.Infrastructure.Mapping
@@ -27,21 +26,12 @@ namespace Rewinery.Server.Infrastructure.Mapping
             CreateMap<Ingredient, IngredientReadDto>();
             CreateMap<IngredientCreateDto, Ingredient>();
 
-            CreateMap<Wine, WineReadDto>()
-                .ForMember(wineReadDto => wineReadDto.Id,
-                   opt => opt.MapFrom(wine => wine.Id))
-                .ForMember(wineReadDto => wineReadDto.GrapeName,
-                opt => opt.MapFrom(wine => wine.Grape.Name))
-                .ForMember(wineReadDto => wineReadDto.CategoryName,
-                opt => opt.MapFrom(wine => wine.Grape.Category.Name))
-                .ForMember(wineReadDto => wineReadDto.SubcategoryName,
-                opt => opt.MapFrom(wine => wine.Grape.Subcategory.Name));
+            CreateMap<Wine, WineReadDto>();
 
             CreateMap<WineCreateDto, Wine>();
 
             CreateMap<ApplicationUser, UserReadDto>();
 
-            CreateMap<WineRecipe, WineRecipeReadDto>();
 
 
         }

@@ -24,20 +24,18 @@ namespace Rewinery.Server.Infrastructure
 
         public async Task<GrapeReadDto> GetAsync(int id)
         {
-            var obj = _mapper.Map<GrapeReadDto>(await _ctx.Grapes.Include(x => x.Category).Include(y => y.Subcategory).FirstOrDefaultAsync(x => x.Id == id));
+            var obj = _mapper.Map<GrapeReadDto>(await _ctx.Grapes.FirstOrDefaultAsync(x => x.Id == id));
             return obj;
         }
 
         public async Task<IEnumerable<GrapeReadDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<GrapeReadDto>>(await _ctx.Grapes.Include(x => x.Category).Include(y => y.Subcategory).ToListAsync());
+            return _mapper.Map<IEnumerable<GrapeReadDto>>(await _ctx.Grapes.ToListAsync());
         }
 
         public async Task<string> CreateAsync(GrapeCreateDto grapeobj)
         {
             var newgrape = _mapper.Map<Grape>(grapeobj);
-            newgrape.Category = _ctx.Categories.FirstOrDefault(x => x.Id == grapeobj.CategoryId);
-            newgrape.Subcategory = _ctx.Subcategories.FirstOrDefault(x => x.Id == grapeobj.SubcategoryId);
             await _ctx.Grapes.AddAsync(newgrape);
             await _ctx.SaveChangesAsync();
             return newgrape.Id.ToString();
@@ -53,8 +51,6 @@ namespace Rewinery.Server.Infrastructure
             grape.Name = grapeobj.Name;
             grape.Icon = grapeobj.Icon;
             grape.Price = grapeobj.Price;
-            grape.Category = _ctx.Categories.FirstOrDefault(x => x.Id == grapeobj.CategoryId);
-            grape.Subcategory = _ctx.Subcategories.FirstOrDefault(x => x.Id == grapeobj.SubcategoryId);
             await _ctx.SaveChangesAsync();
         }
     }

@@ -7,6 +7,6 @@ namespace Rewinery.Server.Core.Models.Wines
         /// <summary>
         /// Subcategory name
         /// </summary>
-        public string Name { get; set; } = "Subcategory";
+        public string Name { get; set; }
     }
 }

@@ -25,8 +25,6 @@ namespace Rewinery.Server.Infrastructure
         public async Task<WineReadDto> GetAsync(int id)
         {
             return _mapper.Map<WineReadDto>(await _ctx.Wines
-                .Include(x => x.Grape).ThenInclude(x => x.Category)
-                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
                 .Include(x => x.Ingredients)
                 .FirstOrDefaultAsync(x => x.Id == id));
 
@@ -35,8 +33,6 @@ namespace Rewinery.Server.Infrastructure
         public async Task<IEnumerable<WineReadDto>> GetAllAsync()
         {
             return _mapper.Map<IEnumerable<WineReadDto>>(await _ctx.Wines
-                .Include(x => x.Grape).ThenInclude(x => x.Category)
-                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
                 .Include(x => x.Ingredients)
                 .ToListAsync());
         }

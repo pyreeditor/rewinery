@@ -10,7 +10,7 @@ namespace Rewinery.Server.Core.Models.Wines
     public class Ingredient : BaseEntity
     {
         #pragma warning disable CS8618
-        public string Name { get; set; } = "Some ingradient";
+        public string Name { get; set; }
 
         public string Icon { get; set; }
 

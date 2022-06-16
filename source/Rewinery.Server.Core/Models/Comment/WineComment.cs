@@ -1,8 +1,9 @@
 ﻿using Rewinery.Server.Core.Models.Base;
+using Rewinery.Server.Core.Models.Wines;
 
 namespace Rewinery.Server.Core.Models.Comment
 {
-    public class RecipeComment : BaseEntity
+    public class WineComment : BaseEntity
     {
         #pragma warning disable CS8618
         /// <summary>
@@ -11,19 +12,14 @@ namespace Rewinery.Server.Core.Models.Comment
         public ApplicationUser User { get; set; }
 
         /// <summary>
-        /// Information about wine recepi
+        /// Information about wine
         /// </summary>
-        public WineRecipe Recipe { get; set; }
+        public Wine Wine { get; set; }
 
         /// <summary>
         /// Comment text
         /// </summary>
-        public string? Comment { get; set; }
-
-        /// <summary>
-        /// Rating which was set by user
-        /// </summary>
-        public int Rating { get; set; }
+        public string Comment { get; set; }
 
         /// <summary>
         /// Collection of responces to this comment

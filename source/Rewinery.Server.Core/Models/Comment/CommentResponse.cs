@@ -13,7 +13,7 @@ namespace Rewinery.Server.Core.Models.Comment
         /// <summary>
         /// Information about user comment for wine recipe
         /// </summary>
-        public RecipeComment Comment { get; set; }
+        public WineComment Comment { get; set; }
 
         /// <summary>
         /// Information about the user who written the responce to comment
