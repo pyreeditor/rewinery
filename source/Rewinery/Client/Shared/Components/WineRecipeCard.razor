@@ -1,35 +1,43 @@
-﻿<div class="card">
-    <div class="card-top">
-        <div class="card-cover">
-            <img class="card-cover-img" src="/img/wine-bg-1.jpg">
-        </div>
-        <div class="card-section-button">
-            <button class="card-button">
-                <MudToggleIconButton @bind-Toggled="@Liked"
+﻿@using Rewinery.Shared.Dtos.WinesDtos
+
+@if(wine != null)
+{
+    <div class="card">
+        <div class="card-top">
+            <div class="card-cover">
+                <img class="card-cover-img" src="/img/wine-bg-1.jpg">
+            </div>
+            <div class="card-section-button">
+                <button class="card-button">
+                    <MudToggleIconButton @bind-Toggled="@Liked"
                                      Icon="@Icons.Filled.FavoriteBorder" Color="@Color.Default" Title="Favorite"
                                      ToggledIcon="@Icons.Filled.Favorite" ToggledColor="@Color.Error" ToggledTitle="On" />
-            </button>
-            <button class="card-button">
-                <MudToggleIconButton @bind-Toggled="@Compared"
+                </button>
+                <button class="card-button">
+                    <MudToggleIconButton @bind-Toggled="@Compared"
                                      Icon="@Icons.Filled.CompareArrows" Color="@Color.Default" Title="Compare"
                                      ToggledIcon="@Icons.Filled.CompareArrows" ToggledColor="@Color.Warning" ToggledTitle="On" />
-            </button>
-            <button class="card-button">
-                <MudIconButton Icon="@Icons.Material.Filled.Share" Title="Share" />
-            </button>
+                </button>
+                <button class="card-button">
+                    <MudIconButton Icon="@Icons.Material.Filled.Share" Title="Share" />
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="card-down">
-        <div class="card-section-down">
-            <div class="card-text">
-                <div class="card-title"> Some wine</div>
-                <div class="card-description">Some info</div>
+        <div class="card-down">
+            <div class="card-section-down">
+                <div class="card-text">
+                    <div class="card-title">@wine.Name</div>
+                    <div class="card-description">@wine.SubcategoryName</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 
 @code {
     public bool Liked { get; set; }
     public bool Compared { get; set; }
+
+    [Parameter]
+    public WineReadDto? wine { get; set; }
 }

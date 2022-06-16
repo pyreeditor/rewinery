@@ -12,7 +12,7 @@
 }
 
 .wr-mb {
-    margin-bottom: 3rem !important;
+    margin-bottom: 25px !important;
 }
 
 .wr-pt {
@@ -25,4 +25,10 @@
     box-shadow: inset 0 0 500px rgba(255, 255, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
     border-radius: 15px 15px 0px 0px;
+}
+
+.fix-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
