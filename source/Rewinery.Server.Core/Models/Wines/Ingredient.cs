@@ -16,7 +16,7 @@ namespace Rewinery.Server.Core.Models.Wines
 
         public decimal Price { get; set; }
 
-        public ICollection<Wine> Wine { get; set; }
+        public ICollection<Wine>? Wine { get; set; }
         #pragma warning restore CS8618
     }
 }

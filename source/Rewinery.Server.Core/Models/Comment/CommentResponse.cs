@@ -24,6 +24,8 @@ namespace Rewinery.Server.Core.Models.Comment
         /// Text of comment responce
         /// </summary>
         public string Responce { get; set; }
-        #pragma warning restore CS8618
+
+        public DateTime Created { get; set; } = DateTime.Now;
+#pragma warning restore CS8618
     }
 }

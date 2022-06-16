@@ -18,7 +18,7 @@ namespace Rewinery.Server.Core.Models.Cellar
         /// <summary>
         /// Cellar rental collection
         /// </summary>
-        public ICollection<CellarRental> CellarRental { get; set; }
+        public ICollection<CellarRental>? CellarRental { get; set; }
         #pragma warning restore CS8618
     }
 }

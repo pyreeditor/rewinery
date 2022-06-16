@@ -2,12 +2,14 @@
 
 namespace Rewinery.Server.Core.Models.Topics
 {
-    public class AnswerResponce : BaseEntity
+    public class AnswerResponse : BaseEntity
     {
         public Answer Answer { get; set; }
 
         public ApplicationUser User { get; set; }
 
         public string ResponceText { get; set; }
+
+        public DateTime Created { get; set; } = DateTime.Now;
     }
 }

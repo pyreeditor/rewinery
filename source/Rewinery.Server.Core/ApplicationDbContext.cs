@@ -56,7 +56,7 @@ namespace Rewinery.Server.Core
 
         public DbSet<Answer> Answers { get; set; }
 
-        public DbSet<AnswerResponce> AnswerResponces { get; set; }
+        public DbSet<AnswerResponse> AnswerResponces { get; set; }
         #endregion
     }
 }

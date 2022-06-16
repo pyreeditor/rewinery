@@ -9,6 +9,8 @@ namespace Rewinery.Server.Core.Models.Topics
 
         public string AnswerText { get; set; }
 
-        public ICollection<AnswerResponce> AnswerResponces { get; set; }
+        public ICollection<AnswerResponse>? AnswerResponces { get; set; }
+
+        public DateTime Created { get; set; } = DateTime.Now;
     }
 }

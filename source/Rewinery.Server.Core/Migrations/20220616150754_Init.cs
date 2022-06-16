@@ -304,7 +304,8 @@ namespace Rewinery.Server.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -368,7 +369,8 @@ namespace Rewinery.Server.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TopicId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -454,7 +456,8 @@ namespace Rewinery.Server.Core.Migrations
                     WineId = table.Column<int>(type: "int", nullable: false),
                     Volume = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false)
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -486,7 +489,8 @@ namespace Rewinery.Server.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     WineId = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -513,7 +517,8 @@ namespace Rewinery.Server.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AnswerId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ResponceText = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ResponceText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -539,7 +544,8 @@ namespace Rewinery.Server.Core.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CommentId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Responce = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Responce = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

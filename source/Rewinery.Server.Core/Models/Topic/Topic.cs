@@ -15,6 +15,8 @@ namespace Rewinery.Server.Core.Models.Topics
 
         public string Description { get; set; }
 
-        public ICollection<Answer> Answers { get; set; }
+        public ICollection<Answer>? Answers { get; set; }
+
+        public DateTime Created { get; set; } = DateTime.Now;
     }
 }

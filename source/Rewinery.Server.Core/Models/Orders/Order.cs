@@ -15,6 +15,8 @@ namespace Rewinery.Server.Core.Models.Orders
         public decimal Price { get; set; }
 
         public OrderStatus Status { get; set; }
+
+        public DateTime Created { get; set; } = DateTime.Now;
         #pragma warning restore CS8618
     }
 }

@@ -12,7 +12,7 @@ using Rewinery.Server.Core;
 namespace Rewinery.Server.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220616140559_Init")]
+    [Migration("20220616150754_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -457,6 +457,9 @@ namespace Rewinery.Server.Core.Migrations
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Responce")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -485,6 +488,9 @@ namespace Rewinery.Server.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -508,6 +514,9 @@ namespace Rewinery.Server.Core.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -564,6 +573,9 @@ namespace Rewinery.Server.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
@@ -579,7 +591,7 @@ namespace Rewinery.Server.Core.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Topics.AnswerResponce", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Topics.AnswerResponse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -589,6 +601,9 @@ namespace Rewinery.Server.Core.Migrations
 
                     b.Property<int>("AnswerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ResponceText")
                         .IsRequired()
@@ -613,6 +628,9 @@ namespace Rewinery.Server.Core.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -930,7 +948,7 @@ namespace Rewinery.Server.Core.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Topics.AnswerResponce", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Topics.AnswerResponse", b =>
                 {
                     b.HasOne("Rewinery.Server.Core.Models.Topics.Answer", "Answer")
                         .WithMany("AnswerResponces")
