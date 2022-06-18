@@ -8,7 +8,7 @@ namespace Rewinery.Server.Core.Models.Topics
 
         public ApplicationUser User { get; set; }
 
-        public string ResponceText { get; set; }
+        public string ResponseText { get; set; }
 
         public DateTime Created { get; set; } = DateTime.Now;
     }

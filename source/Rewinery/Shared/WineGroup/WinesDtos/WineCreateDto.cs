@@ -5,7 +5,7 @@ namespace Rewinery.Shared.WineGroup.WinesDtos
     public class WineCreateDto
     {
 #pragma warning disable CS8618
-        public string OwneriId { get; set; }
+        public string OwnerUserName { get; set; }
 
         public string Name { get; set; }
 

@@ -3,13 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
 using Rewinery.Shared.WineGroup.WinesDtos;
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Rewinery.Server.Infrastructure
 {
@@ -17,7 +10,7 @@ namespace Rewinery.Server.Infrastructure
     {
         private readonly ApplicationDbContext _ctx;
         private readonly IMapper _mapper;
-        //private readonly HttpContextAccessor _httpContextAccessor;
+ 
 
         public WineRepository(ApplicationDbContext ctx, IMapper mapper)
         {
@@ -29,14 +22,34 @@ namespace Rewinery.Server.Infrastructure
         {
             return _mapper.Map<WineRecipePageReadDto>(await _ctx.Wines
                 .Include(x => x.Ingredients)
-                .Include(x=>x.Grape)
+                .Include(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x=>x.Comments).ThenInclude(x=>x.Responses)
+                .Include(x => x.Owner)
                 .FirstOrDefaultAsync(x => x.Id == id));
         }
 
         public async Task<IEnumerable<WineRecipePageReadDto>> GetAllAsync()
         {
             return _mapper.Map<IEnumerable<WineRecipePageReadDto>>(await _ctx.Wines
-                .Include(x => x.Ingredients).Include(x=>x.Grape)
+                .Include(x => x.Ingredients)
+                .Include(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x => x.Comments).ThenInclude(x => x.Responses)
+                .Include(x => x.Owner)
+                .ToListAsync());
+        }
+        public async Task<IEnumerable<WineRecipePageReadDto>> GetAllByUserNameAsync(string userName)
+        {
+            return _mapper.Map<IEnumerable<WineRecipePageReadDto>>(await _ctx.Wines
+                .Include(x => x.Ingredients)
+                .Include(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x => x.Comments).ThenInclude(x => x.Responses)
+                .Include(x => x.Owner).Where(x=>x.Owner.UserName== userName)
                 .ToListAsync());
         }
         public async Task DeleteAsync(int id)
@@ -61,29 +74,20 @@ namespace Rewinery.Server.Infrastructure
                 newwine.Price += ing.Price;
             }
             newwine.Ingredients = temping;
+            newwine.Owner = _ctx.Users.FirstOrDefault(x => x.UserName == wineobj.OwnerUserName);
             await _ctx.Wines.AddAsync(newwine);
             await _ctx.SaveChangesAsync();
             return newwine.Id;
         }
-        //public async Task<int> UpdateAsync(WineUpdateDto wineobj)
-        //{
-        //    var wine = _ctx.Wines.Find(wineobj.Id);
-        //    wine.Name = wineobj.Name;
-        //    wine.Description = wineobj.Description;
-        //    wine.Grape = _ctx.Grapes.Find(wineobj.GrapeId);
-        //    wine.Price = _ctx.Grapes.Find(wineobj.GrapeId).Price;
-
-        //    List<Ingredient> temping = new List<Ingredient>();
-        //    foreach (var item in wineobj.IngredientsIds)
-        //    {
-        //        var ing = _ctx.Ingredients.Find(item);
-        //        temping.Add(ing);
-        //        wine.Price += ing.Price;
-        //    }
-
-        //    wine.Ingredients = temping;
-        //    await _ctx.SaveChangesAsync();
-        //    return wine.Id;
-        //}
+        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
+        {
+            var wine = _ctx.Wines.Find(wineobj.Id);
+            wine.Name = wineobj.Name;
+            wine.Description = wineobj.Description;
+            wine.Icon = wineobj.Icon;
+            wine.Public = wineobj.Public;
+            await _ctx.SaveChangesAsync();
+            return wine.Id;
+        }
     }
 }

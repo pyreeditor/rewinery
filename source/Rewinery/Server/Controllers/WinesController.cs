@@ -27,6 +27,12 @@ namespace Rewinery.Server.Controllers
         {
             return await _wineRepository.GetAllAsync();
         }
+        [Route("/api/GetListByUserNameAsync/{userName}")]
+        [HttpGet]
+        public async Task<IEnumerable<WineRecipePageReadDto>> GetListByUserNameAsync(string userName)
+        {
+            return await _wineRepository.GetAllByUserNameAsync(userName);
+        }
 
         [HttpPost]
         public async Task<int> CreateAsync(WineCreateDto wine)
@@ -34,18 +40,19 @@ namespace Rewinery.Server.Controllers
             return await _wineRepository.CreateAsync(wine);
         }
 
+        [Route("/api/wines/delete/{id}")]
         [HttpDelete]
         public async Task<int> DeleteAsync(int id)
         {
             await _wineRepository.DeleteAsync(id);
             return id;
         }
-
-        //[HttpPut]
-        //public async Task<int> UpdateAsync(WineUpdateDto wineobj)
-        //{
-        //    await _wineRepository.UpdateAsync(wineobj);
-        //    return wineobj.Id;
-        //}
+        
+        [HttpPut]
+        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
+        {
+            await _wineRepository.UpdateAsync(wineobj);
+            return wineobj.Id;
+        }
     }
 }

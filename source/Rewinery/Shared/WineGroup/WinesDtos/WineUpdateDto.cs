@@ -9,8 +9,6 @@ namespace Rewinery.Shared.WineGroup.WinesDtos
 
         public string Description { get; set; }
 
-        public int GrapeId { get; set; }
-
         public string Icon { get; set; }
 
         public bool Public { get; set; }
