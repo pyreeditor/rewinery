@@ -32,6 +32,12 @@ builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<GrapeRepository>();
 builder.Services.AddScoped<IngredientRepository>();
 builder.Services.AddScoped<WineRepository>();
+builder.Services.AddScoped<AnswerRepository>();
+builder.Services.AddScoped<AnswerResponseRepository>();
+builder.Services.AddScoped<TopicRepository>();
+builder.Services.AddScoped<CommentResponseRepository>();
+builder.Services.AddScoped<WineCommentRepository>();
+builder.Services.AddScoped<OrderStatusRepository>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
