@@ -1,32 +1,58 @@
-﻿<div class="filter-bar">
+﻿@using Rewinery.Client.Infrastructure
+@using Rewinery.Shared.WineGroup.CategoriesDtos
+@using Rewinery.Shared.WineGroup.SubcategoriesDtos
+@using Rewinery.Shared.WineGroup.IngredientsDtos
+
+@inject HttpCategoriesRepository _httpCategories
+@inject HttpSubcategoryRepository _httpSubcategory
+@inject HttpIngredientRepository _httpIngredient
+
+<div class="filter-bar">
     <MudList Clickable="true" Style="width: 80%; margin-left: 10%; padding-top: 10%">
-        <MudSelect T="string" Label="Wine type" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options" Class="pb-10">
-            @foreach (var state in states)
+        <MudSelect T="string" Label="Wine type" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="categoriesOptions" Class="pb-10">
+            @if (categories != null)
             {
-                <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                @foreach (var category in categories)
+                {
+                    <MudSelectItem T="string" Value="@category.Name">@category.Name</MudSelectItem>
+                }
             }
         </MudSelect>
-        <MudSelect T="string" Label="Wine variety" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options" Class="pb-10">
-            @foreach (var state in states)
+        <MudSelect T="string" Label="Wine variety" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="subcategoriesOptions" Class="pb-10">
+            @if (subcategories != null)
             {
-                <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                @foreach (var subcategory in subcategories)
+                {
+                    <MudSelectItem T="string" Value="@subcategory.Name">@subcategory.Name</MudSelectItem>
+                }
             }
         </MudSelect>
-        <MudSelect T="string" Label="Ingredients" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options" Class="pb-10">
-            @foreach (var state in states)
+        <MudSelect T="string" Label="Ingredients" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="ingredientsOptions" Class="pb-10">
+            @if (ingredients != null)
             {
-                <MudSelectItem T="string" Value="@state">@state</MudSelectItem>
+                @foreach (var ingredient in ingredients)
+                {
+                    <MudSelectItem T="string" Value="@ingredient.Name">@ingredient.Name</MudSelectItem>
+                }
             }
         </MudSelect>
     </MudList>
 </div>
 
 @code {
-    private string value { get; set; }
-    private IEnumerable<string> options { get; set; } = new HashSet<string>();
+    private string? value { get; set; } = null;
+    private IEnumerable<string> categoriesOptions { get; set; } = new HashSet<string>();
+    private IEnumerable<string> subcategoriesOptions { get; set; } = new HashSet<string>();
+    private IEnumerable<string> ingredientsOptions { get; set; } = new HashSet<string>();
 
-    private string[] states =
+    public IEnumerable<CategoryReadDto>? categories;
+    public IEnumerable<SubcategoryReadDto>? subcategories;
+    public IEnumerable<IngredientReadDto>? ingredients;
+
+    protected override async Task OnInitializedAsync()
     {
-        "test1", "test2", "test3", "test4", "test5"
-    };
+        categories = await _httpCategories.GetAllAsync();
+        subcategories = await _httpSubcategory.GetAllAsync();
+        ingredients = await _httpIngredient.GetAllAsync();
+    }
 }

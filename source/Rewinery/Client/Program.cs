@@ -13,6 +13,8 @@ builder.Services.AddHttpClient("Rewinery.ServerAPI", client => client.BaseAddres
     //.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddScoped<HttpCategoriesRepository>();
+builder.Services.AddScoped<HttpSubcategoryRepository>();
+builder.Services.AddScoped<HttpIngredientRepository>();
 
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Rewinery.ServerAPI"));

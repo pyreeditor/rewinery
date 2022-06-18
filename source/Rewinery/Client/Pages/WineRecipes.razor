@@ -1,4 +1,5 @@
 ﻿@page "/wine-recipes"
+
 @using Rewinery.Client.Shared.Components
 @using Rewinery.Client.Infrastructure
 @using Rewinery.Shared.WineGroup.WinesDtos
@@ -15,7 +16,7 @@
         <div class="col-9">
             <div class="container overflow-hidden wr-pt">
                 <div class="row gy-5 wr-mb">
-                    @if (recipes != null)
+                   @* @if (recipes != null)
                     {
                         @foreach (var recipe in recipes)
                         {
@@ -23,7 +24,7 @@
                                 <WineRecipeCard wine="recipe" />
                             </div>
                         }
-                    }
+                    }*@
                 </div>
             </div>
         </div>
@@ -36,10 +37,10 @@
 </div>
 
 @code {
-    public IEnumerable<WineRecipePageReadDto>? recipes;
+    //public IEnumerable<WineRecipePageReadDto>? recipes;
 
-    protected override async Task OnInitializedAsync()
-    {
-        recipes = await _httpCategories.GetAllAsync();
-    }
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    recipes = await _httpCategories.GetAllAsync();
+    //}
 }

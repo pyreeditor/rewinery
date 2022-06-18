@@ -1,4 +1,4 @@
-﻿using Rewinery.Shared.WineGroup.WinesDtos;
+﻿using Rewinery.Shared.WineGroup.CategoriesDtos;
 using System.Net.Http.Json;
 
 namespace Rewinery.Client.Infrastructure
@@ -7,9 +7,9 @@ namespace Rewinery.Client.Infrastructure
     {
         public HttpCategoriesRepository(HttpClient httpClient) : base(httpClient) { }
 
-        public async Task<IEnumerable<WineRecipePageReadDto>> GetAllAsync()
+        public async Task<IEnumerable<CategoryReadDto>> GetAllAsync()
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<WineRecipePageReadDto>>($"/api/wines");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<CategoryReadDto>>($"/api/categories");
         }
     }
 }
