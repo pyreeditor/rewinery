@@ -1,22 +1,13 @@
 ﻿using AutoMapper;
-using Rewinery.Server.Core.Models;
-using Rewinery.Server.Core.Models.Comment;
-using Rewinery.Server.Core.Models.Orders;
-using Rewinery.Server.Core.Models.Topics;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared;
-using Rewinery.Shared.CommentGroup.CommentResponsesDtos;
-using Rewinery.Shared.CommentGroup.WineCommentsDtos;
-using Rewinery.Shared.OrderGroup.OrdersDtos;
-using Rewinery.Shared.OrderGroup.OrderStatusDtos;
-using Rewinery.Shared.TopicGroup.AnswerResponsesDtos;
-using Rewinery.Shared.TopicGroup.AnswersDtos;
-using Rewinery.Shared.TopicGroup.TopicsDtos;
-using Rewinery.Shared.WineGroup.CategoriesDtos;
-using Rewinery.Shared.WineGroup.GrapesDtos;
-using Rewinery.Shared.WineGroup.IngredientsDtos;
-using Rewinery.Shared.WineGroup.SubcategoriesDtos;
-using Rewinery.Shared.WineGroup.WinesDtos;
+using Rewinery.Shared.WineGroup.Category;
+using Rewinery.Shared.WineGroup.Comment;
+using Rewinery.Shared.WineGroup.Comment.Response;
+using Rewinery.Shared.WineGroup.Grape;
+using Rewinery.Shared.WineGroup.Ingredient;
+using Rewinery.Shared.WineGroup.Subcategory;
+using Rewinery.Shared.WineGroup.Wine;
+using Rewinery.Shared.WineGroup.WineRecipePage;
 
 namespace Rewinery.Server.Infrastructure.Mapping
 {
@@ -24,66 +15,93 @@ namespace Rewinery.Server.Infrastructure.Mapping
     {
         public AutoMapperProfiles()
         {
-            CreateMap<SubcategoryCreateDto, Subcategory>();
-            CreateMap<Subcategory, SubcategoryReadDto>();
+            #region wine-recipe-page-mapping
+            CreateMap<Wine, ShortWineDto>()
+                .ForMember(sgd => sgd.Owner,
+                opt => opt.MapFrom(grape => grape.Owner.UserName));
 
-            CreateMap<CategoryCreateDto, Category>();
-            CreateMap<Category, CategoryReadDto>();
+            CreateMap<Grape, ShortGrapeDto>()
+                .ForMember(sgd => sgd.Category,
+                opt => opt.MapFrom(grape => grape.Category.Name))
+                .ForMember(sgd => sgd.Subcategory,
+                opt => opt.MapFrom(grape => grape.Subcategory.Name));
 
-            CreateMap<Grape, GrapeReadDto>();
-            CreateMap<GrapeCreateDto, Grape>();
+            CreateMap<Ingredient, ShortIngredientDto>();
+            #endregion
 
-            CreateMap<Ingredient, IngredientReadDto>();
-            CreateMap<IngredientCreateDto, Ingredient>();
+            #region wine
+            CreateMap<CreateWineDto, Wine>();
 
-            CreateMap<Wine, WineRecipePageReadDto>();
+            CreateMap<Wine, WineDto>()
+                .ForMember(wd => wd.Owner,
+                opt => opt.MapFrom(wine => wine.Owner.UserName))
+                .ForMember(wd => wd.Inredients,
+                opt => opt.MapFrom(wine => wine.Ingredients))
+                .ForMember(wd => wd.Comments,
+                opt => opt.MapFrom(wine => wine.Comments));
 
-            CreateMap<WineCreateDto, Wine>();
+            CreateMap<UpdateWineDto, Wine>();
+            #endregion
 
-            CreateMap<ApplicationUser, UserReadDto>();
+            #region grape
+            CreateMap<CreateGrapeDto, Grape>();
 
+            CreateMap<Grape, GrapeDto>()
+                .ForMember(gd => gd.Category,
+                opt => opt.MapFrom(grape => grape.Category.Name))
+                .ForMember(gd => gd.Subcategory,
+                opt => opt.MapFrom(grape => grape.Subcategory.Name));
 
-            CreateMap<Topic, ShortTopicInfoDto>()
-                .ForMember(topicdto => topicdto.OwnerUserName,
-                   opt => opt.MapFrom(topic => topic.User.UserName));
+            CreateMap<UpdateGrapeDto, Grape>();
+            #endregion
 
-            CreateMap<Topic, TopicPageDto>()
-            .ForMember(topicdto => topicdto.OwnerUserName,
-                   opt => opt.MapFrom(topic => topic.User.UserName));
+            #region category
+            CreateMap<CreateCategoryDto, Category>();
 
-            CreateMap<TopicCreateDto, Topic>();
+            CreateMap<Category, CategoryDto>();
 
-            CreateMap<Answer, AnswerReadDto>()
-                .ForMember(answerReadDto => answerReadDto.OwnerUserName,
-                   opt => opt.MapFrom(answer => answer.User.UserName))
-                .ForMember(answerReadDto => answerReadDto.AnswerResponsesList,
-                   opt => opt.MapFrom(answer => answer.AnswerResponces));
+            CreateMap<CategoryDto, Category>();
+            #endregion
 
-            CreateMap<AnswerResponse, AnswerResponseReadDto>()
-                .ForMember(answerResponseReadDto => answerResponseReadDto.OwnerUserName,
-                   opt => opt.MapFrom(answerResponse => answerResponse.User.UserName));
+            #region subcategory
+            CreateMap<CreateSubcategoryDto, Subcategory>();
 
-            CreateMap<AnswerCreateDto, Answer>();
+            CreateMap<Subcategory, SubcategoryDto>();
 
-            CreateMap<AnswerResponseCreateDto, AnswerResponse>();
+            CreateMap<SubcategoryDto, Subcategory>();
+            #endregion
 
-            CreateMap<WineComment, WineCommentReadDto>()
-                .ForMember(topicdto => topicdto.CommentOwnerUserName,
-                   opt => opt.MapFrom(topic => topic.User.UserName))
-                .ForMember(answerReadDto => answerReadDto.CommentResponsesList,
-                   opt => opt.MapFrom(answer => answer.Responses));
+            #region ingredient
+            CreateMap<CreateIngredientDto, Ingredient>();
 
-            CreateMap<CommentResponse, CommentResponseReadDto>()
-                .ForMember(topicdto => topicdto.OwnerUserName,
-                   opt => opt.MapFrom(topic => topic.User.UserName));
+            CreateMap<Ingredient, IngredientDto>();
 
-            CreateMap<WineCommentCreateDto, WineComment>();
+            CreateMap<UpdateIngredientDto, Ingredient>();
+            #endregion
 
-            CreateMap<CommentResponseCreateDto, CommentResponse>();
+            #region comment
+            CreateMap<CreateCommentDto, Comment>();
 
-            CreateMap<OrderStatusCreateDto, OrderStatus>();
+            CreateMap<Comment, CommentDto>()
+                .ForMember(crd => crd.User,
+                opt => opt.MapFrom(comment => comment.User.UserName));
 
-            CreateMap<OrderCreateDto, Order>();
+            CreateMap<UpdateCommentDto, Comment>();
+            #endregion
+
+            #region commentresponse
+            CreateMap<CreateComResponseDto, CommentResponse>();
+
+            CreateMap<CommentResponse, ComResponseDto>()
+                .ForMember(crd => crd.User,
+                opt => opt.MapFrom(response => response.User.UserName));
+
+            CreateMap<UpdateCommentDto, CommentResponse>();
+            #endregion
+
+            #region topic
+
+            #endregion
         }
     }
 }

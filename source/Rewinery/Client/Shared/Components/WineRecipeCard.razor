@@ -1,11 +1,13 @@
-﻿@using Rewinery.Shared.WineGroup.WinesDtos
+﻿@using Rewinery.Shared.WineGroup.WineRecipePage
 
-@if(wine != null)
+@inject NavigationManager _navigation
+
+@if (Wine != null)
 {
     <div class="card">
         <div class="card-top">
             <div class="card-cover">
-                <img class="card-cover-img" src="/img/wine-bg-1.jpg">
+                <img class="card-cover-img" src="@Wine.Icon">
             </div>
             <div class="card-section-button">
                 <button class="card-button">
@@ -26,8 +28,12 @@
         <div class="card-down">
             <div class="card-section-down">
                 <div class="card-text">
-                    <div class="card-title">@wine.Name</div>
-                    <div class="card-description">@wine.Icon</div>
+                    <div class="card-title">@Wine.Name</div>
+                    <div class="card-description">@Wine.Grape.Category, @Wine.Grape.Subcategory</div>
+                    <div class="card-description">
+                        Price: @Wine.Price
+                        <MudButton OnClick="@(w => Move(Wine.Id))" Class="position-absolute end-0 m-4">Open</MudButton>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,5 +45,7 @@
     public bool Compared { get; set; }
 
     [Parameter]
-    public WineRecipePageReadDto? wine { get; set; }
+    public ShortWineDto? Wine { get; set; }
+
+    public void Move(int id) => _navigation.NavigateTo($"/recipes/{id}");
 }

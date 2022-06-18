@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models;
-using Microsoft.AspNetCore.Identity;
 using Rewinery.Server.Infrastructure;
 using Rewinery.Server.Infrastructure.Mapping;
 
@@ -26,24 +24,20 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
-
-builder.Services.AddScoped<SubcategoryRepository>();
-builder.Services.AddScoped<CategoryRepository>();
-builder.Services.AddScoped<GrapeRepository>();
-builder.Services.AddScoped<IngredientRepository>();
+#region repository
 builder.Services.AddScoped<WineRepository>();
-builder.Services.AddScoped<AnswerRepository>();
-builder.Services.AddScoped<AnswerResponseRepository>();
-builder.Services.AddScoped<TopicRepository>();
+builder.Services.AddScoped<GrapeRepository>();
+builder.Services.AddScoped<CategoryRepository>();
+builder.Services.AddScoped<SubcategoryRepository>();
+builder.Services.AddScoped<IngredientRepository>();
+builder.Services.AddScoped<CommentRepository>();
 builder.Services.AddScoped<CommentResponseRepository>();
-builder.Services.AddScoped<WineCommentRepository>();
-builder.Services.AddScoped<OrderStatusRepository>();
+#endregion
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddSwaggerGen();
-
 
 
 var app = builder.Build();

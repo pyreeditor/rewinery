@@ -2,15 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.WineGroup.IngredientsDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rewinery.Shared.WineGroup.Ingredient;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8601, CS8602, CS8604, CS8620
     public class IngredientRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -22,40 +18,54 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        public async Task<IngredientReadDto> GetAsync(int id)
+        #region get
+        public async Task<IngredientDto> GetAsync(int id)
         {
-            var obj = _mapper.Map<IngredientReadDto>(await _ctx.Ingredients.FirstOrDefaultAsync(x=>x.Id==id));
-            return obj;
+            return _mapper.Map<IngredientDto>(await _ctx.Ingredients.FirstAsync(x => x.Id == id));
         }
 
-        public async Task<IEnumerable<IngredientReadDto>> GetAllAsync()
+        public async Task<IEnumerable<IngredientDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<IngredientReadDto>>(await _ctx.Ingredients.ToListAsync());
+            return _mapper.Map<IEnumerable<IngredientDto>>(await _ctx.Ingredients.ToListAsync());
         }
+        #endregion
 
-        public async Task<string> CreateAsync(IngredientCreateDto ingradientobj)
+        #region create
+        public async Task<int> CreateAsync(CreateIngredientDto cid)
         {
-            var newingredient = _mapper.Map<Ingredient>(ingradientobj);
-            newingredient.Name = ingradientobj.Name;
-            newingredient.Price = ingradientobj.Price;
-            newingredient.Icon = ingradientobj.Icon;
-            await _ctx.AddAsync(newingredient);
+            var ingredient = _mapper.Map<Ingredient>(cid);
+
+            await _ctx.AddAsync(ingredient);
             await _ctx.SaveChangesAsync();
-            return newingredient.Id.ToString();
+
+            return ingredient.Id;
         }
-        public async Task DeleteAsync(int id)
+        #endregion
+
+        #region update
+        public async Task<IngredientDto> UpdateASync(UpdateIngredientDto uid)
+        {
+            var ingredient = _ctx.Ingredients.FirstOrDefault(x => x.Id == uid.Id);
+
+            ingredient.Name = uid.Name;
+            ingredient.Icon = uid.Icon;
+            ingredient.Price = uid.Price;
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<IngredientDto>(ingredient);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
         {
             _ctx.Ingredients.Remove(_ctx.Ingredients.Find(id));
-            await _ctx.SaveChangesAsync();
-        }
 
-        public async Task UpdateASync(IngredientUpdateDto ingredientobj)
-        {
-            var ingredient = _ctx.Ingredients.FirstOrDefault(x => x.Id == ingredientobj.Id);
-            ingredient.Name = ingredientobj.Name;
-            ingredient.Icon = ingredientobj.Icon;
-            ingredient.Price = ingredientobj.Price;
             await _ctx.SaveChangesAsync();
+
+            return 200;
         }
+        #endregion
     }
 }

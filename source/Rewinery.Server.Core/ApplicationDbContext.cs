@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Rewinery.Server.Core.Models;
 using Rewinery.Server.Core.Models.Cellar;
-using Rewinery.Server.Core.Models.Comment;
 using Rewinery.Server.Core.Models.Orders;
 using Rewinery.Server.Core.Models.Topics;
 using Rewinery.Server.Core.Models.Wines;
@@ -31,10 +30,8 @@ namespace Rewinery.Server.Core
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Subcategory> Subcategories { get; set; }
-        #endregion
 
-        #region comment
-        public DbSet<WineComment> WineComments { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public DbSet<CommentResponse> CommentResponses { get; set; }
         #endregion

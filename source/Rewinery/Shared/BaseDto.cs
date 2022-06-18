@@ -8,6 +8,9 @@ namespace Rewinery.Shared
 {
     public class BaseDto
     {
+        /// <summary>
+        /// Object ID
+        /// </summary>
         public int Id { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rewinery.Server.Core.Models.Topics
 {
+    #pragma warning disable CS8618
     public class Topic : BaseEntity
     {
         public ApplicationUser User { get; set; }
@@ -17,6 +18,6 @@ namespace Rewinery.Server.Core.Models.Topics
 
         public ICollection<Answer>? Answers { get; set; }
 
-        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime? Created { get; set; } = DateTime.Now;
     }
 }

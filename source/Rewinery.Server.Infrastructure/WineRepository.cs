@@ -2,92 +2,122 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.WineGroup.WinesDtos;
+using Rewinery.Shared.WineGroup.Wine;
+using Rewinery.Shared.WineGroup.WineRecipePage;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8620, CS8601, CS8604
     public class WineRepository
     {
         private readonly ApplicationDbContext _ctx;
         private readonly IMapper _mapper;
  
-
         public WineRepository(ApplicationDbContext ctx, IMapper mapper)
         {
             _ctx = ctx;
             _mapper = mapper;
         }
 
-        public async Task<WineRecipePageReadDto> GetAsync(int id)
+        #region get
+        /// <summary>
+        /// Method for obtaining information about one wine by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> Wine object with all fields including comments</returns>
+        public async Task<WineDto> GetAsync(int id)
         {
-            return _mapper.Map<WineRecipePageReadDto>(await _ctx.Wines
-                .Include(x => x.Ingredients)
-                .Include(x => x.Grape).ThenInclude(x => x.Category)
-                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
-                .Include(x => x.Comments).ThenInclude(x => x.User)
-                .Include(x=>x.Comments).ThenInclude(x=>x.Responses)
+            return _mapper.Map<WineDto>(await _ctx.Wines
                 .Include(x => x.Owner)
-                .FirstOrDefaultAsync(x => x.Id == id));
-        }
-
-        public async Task<IEnumerable<WineRecipePageReadDto>> GetAllAsync()
-        {
-            return _mapper.Map<IEnumerable<WineRecipePageReadDto>>(await _ctx.Wines
-                .Include(x => x.Ingredients)
                 .Include(x => x.Grape).ThenInclude(x => x.Category)
                 .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
-                .Include(x => x.Comments).ThenInclude(x => x.User)
+                .Include(x => x.Ingredients)
                 .Include(x => x.Comments).ThenInclude(x => x.Responses)
+                .FirstAsync(x => x.Id == id));
+        }
+
+        /// <summary>
+        /// A method for obtaining a list of brief information on each wine
+        /// </summary>
+        /// <returns>List of objects with abbreviated information about wine</returns>
+        public async Task<IEnumerable<ShortWineDto>> GetAllShortAsync()
+        {
+            return _mapper.Map< IEnumerable<ShortWineDto>>(await _ctx.Wines
                 .Include(x => x.Owner)
-                .ToListAsync());
-        }
-        public async Task<IEnumerable<WineRecipePageReadDto>> GetAllByUserNameAsync(string userName)
-        {
-            return _mapper.Map<IEnumerable<WineRecipePageReadDto>>(await _ctx.Wines
-                .Include(x => x.Ingredients)
                 .Include(x => x.Grape).ThenInclude(x => x.Category)
                 .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
-                .Include(x => x.Comments).ThenInclude(x => x.User)
-                .Include(x => x.Comments).ThenInclude(x => x.Responses)
-                .Include(x => x.Owner).Where(x=>x.Owner.UserName== userName)
-                .ToListAsync());
-        }
-        public async Task DeleteAsync(int id)
-        {
-            _ctx.Wines.Remove(_ctx.Wines.Find(id));
-            await _ctx.SaveChangesAsync();
+                .Include(x => x.Ingredients)
+                .Where(x => x.Public == true).ToListAsync());
         }
 
-        public async Task<int> CreateAsync(WineCreateDto wineobj)
+        /// <summary>
+        /// A method for obtaining a list of brief information about wines belonging to the user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>List of objects with abbreviated information about wine</returns>
+        public async Task<IEnumerable<ShortWineDto>> GetAllByUserNameAsync(string userName)
         {
-            var newwine = _mapper.Map<Wine>(wineobj);
-            newwine.Name = wineobj.Name;
-            newwine.Description = wineobj.Description;
-            newwine.Grape = _ctx.Grapes.Find(wineobj.GrapeId);
+            return _mapper.Map<IEnumerable<ShortWineDto>>(await _ctx.Wines
+                .Include(x => x.Owner)
+                .Include(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Ingredients)
+                .Where(x => x.Owner.UserName == userName).ToListAsync());
+        }
+        #endregion
 
-            List<Ingredient> temping = new List<Ingredient>();
+        #region create
+        public async Task<int> CreateAsync(CreateWineDto cwd)
+        {
+            var wine = _mapper.Map<Wine>(cwd);
+            wine.Grape = _ctx.Grapes.Find(cwd.GrapeId);
+            wine.Owner = _ctx.Users.First(x => x.UserName == cwd.UserName);
 
-            foreach (var item in wineobj.IngredientsIds)
+            List<Ingredient> ingredients = new List<Ingredient>();
+            foreach (var ing in cwd.Inredients)
             {
-                var ing = _ctx.Ingredients.Find(item);
-                temping.Add(ing);
-                newwine.Price += ing.Price;
+                ingredients.Add(_ctx.Ingredients.Find(ing));
             }
-            newwine.Ingredients = temping;
-            newwine.Owner = _ctx.Users.FirstOrDefault(x => x.UserName == wineobj.OwnerUserName);
-            await _ctx.Wines.AddAsync(newwine);
+
+            wine.Ingredients = ingredients;
+
+            await _ctx.Wines.AddAsync(wine);
             await _ctx.SaveChangesAsync();
-            return newwine.Id;
-        }
-        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
-        {
-            var wine = _ctx.Wines.Find(wineobj.Id);
-            wine.Name = wineobj.Name;
-            wine.Description = wineobj.Description;
-            wine.Icon = wineobj.Icon;
-            wine.Public = wineobj.Public;
-            await _ctx.SaveChangesAsync();
+
             return wine.Id;
         }
+        #endregion
+
+        #region update
+        public async Task<WineDto> UpdateAsync(UpdateWineDto uwd)
+        {
+            var wine = _ctx.Wines.Find(uwd.Id);
+            if (wine != null)
+            {
+                wine.Name = uwd.Name;
+                wine.Description = uwd.Description;
+                wine.Icon = uwd.Icon;
+                wine.Public = uwd.Public;
+            }
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<WineDto>(wine);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
+        {
+            var wine = _ctx.Wines.Find(id);
+
+            if (wine != null)
+                _ctx.Wines.Remove(wine);
+            
+            await _ctx.SaveChangesAsync();
+
+            return 200;
+        }
+        #endregion
     }
 }

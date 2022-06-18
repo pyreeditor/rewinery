@@ -1,51 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rewinery.Server.Infrastructure;
-using Rewinery.Shared.WineGroup.GrapesDtos;
+using Rewinery.Shared.WineGroup.Grape;
 
 namespace Rewinery.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class GrapesController : ControllerBase
+    [Route("api/[controller]")]
+    public class GrapesController : Controller
     {
         private readonly GrapeRepository _grapeRepository;
 
-        public GrapesController(GrapeRepository grapeRepository)
-        {
-            _grapeRepository = grapeRepository;
-        }
+        public GrapesController(GrapeRepository grapeRepository) => _grapeRepository = grapeRepository;
 
-        [Route("/api/grapes/{id}")]
+        #region get
         [HttpGet]
-        public async Task<GrapeReadDto> GetAsync(int id)
+        [Route("/api/grapes/{id}")]
+        public async Task<GrapeDto> GetAsync(int id)
         {
             return await _grapeRepository.GetAsync(id);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<GrapeReadDto>> GetListAsync()
+        public async Task<IEnumerable<GrapeDto>> GetListAsync()
         {
             return await _grapeRepository.GetAllAsync();
         }
+        #endregion
 
+        #region create
         [HttpPost]
-        public async Task<string> CreateAsync(GrapeCreateDto grape)
+        public async Task<int> CreateAsync(CreateGrapeDto grape)
         {
             return await _grapeRepository.CreateAsync(grape);
         }
+        #endregion
 
+        #region update
+        [HttpPut]
+        public async Task<GrapeDto> UpdateAsync(UpdateGrapeDto grape)
+        {
+            return await _grapeRepository.UpdateAsync(grape);
+        }
+        #endregion
+
+        #region delete
         [HttpDelete]
+        [Route("/api/grapes/{id}")]
         public async Task<int> DeleteAsync(int id)
         {
-            await _grapeRepository.DeleteAsync(id);
-            return id;
+            return await _grapeRepository.DeleteAsync(id);
         }
-
-        [HttpPut]
-        public async Task<int> UpdateAsync(GrapeUpdateDto grapeobj)
-        {
-            await _grapeRepository.UpdateAsync(grapeobj);
-            return grapeobj.Id;
-        }
+        #endregion
     }
 }

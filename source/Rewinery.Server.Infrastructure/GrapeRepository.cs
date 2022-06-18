@@ -2,15 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.WineGroup.GrapesDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rewinery.Shared.WineGroup.Grape;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8601, CS8602
     public class GrapeRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -22,39 +18,68 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        public async Task<GrapeReadDto> GetAsync(int id)
+        #region get
+        public async Task<GrapeDto> GetAsync(int Id)
         {
-            var obj = _mapper.Map<GrapeReadDto>(await _ctx.Grapes.FirstOrDefaultAsync(x => x.Id == id));
-            return obj;
+            return _mapper.Map<GrapeDto>(await _ctx.Grapes
+                .Include(x => x.Category)
+                .Include(x => x.Subcategory)
+                .FirstAsync(x => x.Id == Id));
         }
 
-        public async Task<IEnumerable<GrapeReadDto>> GetAllAsync()
+        public async Task<IEnumerable<GrapeDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<GrapeReadDto>>(await _ctx.Grapes.ToListAsync());
+            return _mapper.Map<IEnumerable<GrapeDto>>(await _ctx.Grapes
+                .Include(x => x.Category)
+                .Include(x => x.Subcategory)
+                .ToListAsync());
         }
+        #endregion
 
-        public async Task<string> CreateAsync(GrapeCreateDto grapeobj)
+        #region create
+        public async Task<int> CreateAsync(CreateGrapeDto cgd)
         {
-            var newgrape = _mapper.Map<Grape>(grapeobj);
-            await _ctx.Grapes.AddAsync(newgrape);
+            var grape = _mapper.Map<Grape>(cgd);
+
+            grape.Category = _ctx.Categories.Find(cgd.CategoryId);
+            grape.Subcategory = _ctx.Subcategories.Find(cgd.SubcategoryId);
+
+            await _ctx.Grapes.AddAsync(grape);
             await _ctx.SaveChangesAsync();
-            return newgrape.Id.ToString();
-        }
 
-        public async Task DeleteAsync(int id)
+            return grape.Id;
+        }
+        #endregion
+
+        #region update
+        public async Task<GrapeDto> UpdateAsync(UpdateGrapeDto ugd)
         {
-            _ctx.Grapes.Remove(_ctx.Grapes.Find(id));
-            await _ctx.SaveChangesAsync();
-        }
+            var grape = _ctx.Grapes.Find(ugd.Id);
 
-        public async Task UpdateAsync(GrapeUpdateDto grapeobj)
+            grape.Name = ugd.Name;
+            grape.Icon = ugd.Icon;
+            grape.Price = ugd.Price;
+            grape.Category = _ctx.Categories.Find(ugd.CategoryId);
+            grape.Subcategory = _ctx.Subcategories.Find(ugd.SubcategoryId);
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<GrapeDto>(grape);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
         {
-            var grape = _ctx.Grapes.Find(grapeobj.Id);
-            grape.Name = grapeobj.Name;
-            grape.Icon = grapeobj.Icon;
-            grape.Price = grapeobj.Price;
-            await _ctx.SaveChangesAsync();
-        }
+            var grape = _ctx.Grapes.Find(id);
 
+            if (grape != null)
+                _ctx.Grapes.Remove(grape);
+
+            await _ctx.SaveChangesAsync();
+
+            return 200;
+        }
+        #endregion
     }
 }

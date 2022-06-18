@@ -1,52 +1,56 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rewinery.Server.Infrastructure;
-using Rewinery.Shared.WineGroup.CategoriesDtos;
+using Rewinery.Shared.WineGroup.Category;
 
 namespace Rewinery.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    [Route("api/[controller]")]
+    public class CategoriesController : Controller
     {
         private readonly CategoryRepository _categoryRepository;
 
-        public CategoriesController(CategoryRepository categoryRepository)
-        {
-            _categoryRepository = categoryRepository;
-        }
+        public CategoriesController(CategoryRepository categoryRepository) => _categoryRepository = categoryRepository;
+
+        #region get
         [HttpGet]
-        //[Authorize]
         [Route("/api/categories/{id}")]
-        public async Task<CategoryReadDto> GetAsync(int id)
+        public async Task<CategoryDto> GetAsync(int id)
         {
             return await _categoryRepository.GetAsync(id);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CategoryReadDto>> GetListAsync()
+        public async Task<IEnumerable<CategoryDto>> GetListAsync()
         {
             return await _categoryRepository.GetAllAsync();
         }
+        #endregion
 
+        #region create
         [HttpPost]
-        public async Task<string> CreateAsync(CategoryCreateDto category)
+        public async Task<int> CreateAsync(CreateCategoryDto category)
         {
             return await _categoryRepository.CreateAsync(category);
         }
+        #endregion
 
+        #region update
+        [HttpPut]
+        public async Task<CategoryDto> UpdateAsync(CategoryDto category)
+        {
+            return await _categoryRepository.UpdateAsync(category);
+        }
+        #endregion
+
+        #region delete
         [HttpDelete]
+        [Route("/api/categories/{id}")]
         public async Task<int> DeleteAsync(int id)
         {
-            await _categoryRepository.DeleteAsync(id);
-            return id;
+            return await _categoryRepository.DeleteAsync(id);
         }
-
-        [HttpPut]
-        public async Task<string> UpdateAsync(CategoryUpdateDto categoryobj)
-        {
-            await _categoryRepository.UpdateAsync(categoryobj);
-            return categoryobj.Name;
-        }
+        #endregion
     }
 
 

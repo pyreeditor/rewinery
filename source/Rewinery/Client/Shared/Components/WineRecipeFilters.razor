@@ -1,40 +1,33 @@
 ﻿@using Rewinery.Client.Infrastructure
-@using Rewinery.Shared.WineGroup.CategoriesDtos
-@using Rewinery.Shared.WineGroup.SubcategoriesDtos
-@using Rewinery.Shared.WineGroup.IngredientsDtos
-
-@inject HttpCategoriesRepository _httpCategories
-@inject HttpSubcategoryRepository _httpSubcategory
-@inject HttpIngredientRepository _httpIngredient
 
 <div class="filter-bar">
     <MudList Clickable="true" Style="width: 80%; margin-left: 10%; padding-top: 10%">
         <MudSelect T="string" Label="Wine type" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="categoriesOptions" Class="pb-10">
-            @if (categories != null)
+           @* @if (categories != null)
             {
                 @foreach (var category in categories)
                 {
                     <MudSelectItem T="string" Value="@category.Name">@category.Name</MudSelectItem>
                 }
-            }
+            }*@
         </MudSelect>
         <MudSelect T="string" Label="Wine variety" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="subcategoriesOptions" Class="pb-10">
-            @if (subcategories != null)
+           @* @if (subcategories != null)
             {
                 @foreach (var subcategory in subcategories)
                 {
                     <MudSelectItem T="string" Value="@subcategory.Name">@subcategory.Name</MudSelectItem>
                 }
-            }
+            }*@
         </MudSelect>
         <MudSelect T="string" Label="Ingredients" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="ingredientsOptions" Class="pb-10">
-            @if (ingredients != null)
+            @*@if (ingredients != null)
             {
                 @foreach (var ingredient in ingredients)
                 {
                     <MudSelectItem T="string" Value="@ingredient.Name">@ingredient.Name</MudSelectItem>
                 }
-            }
+            }*@
         </MudSelect>
     </MudList>
 </div>
@@ -45,14 +38,14 @@
     private IEnumerable<string> subcategoriesOptions { get; set; } = new HashSet<string>();
     private IEnumerable<string> ingredientsOptions { get; set; } = new HashSet<string>();
 
-    public IEnumerable<CategoryReadDto>? categories;
-    public IEnumerable<SubcategoryReadDto>? subcategories;
-    public IEnumerable<IngredientReadDto>? ingredients;
+    //public IEnumerable<CategoryReadDto>? categories;
+    //public IEnumerable<SubcategoryReadDto>? subcategories;
+    //public IEnumerable<IngredientReadDto>? ingredients;
 
-    protected override async Task OnInitializedAsync()
-    {
-        categories = await _httpCategories.GetAllAsync();
-        subcategories = await _httpSubcategory.GetAllAsync();
-        ingredients = await _httpIngredient.GetAllAsync();
-    }
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    categories = await _httpCategories.GetAllAsync();
+    //    subcategories = await _httpSubcategory.GetAllAsync();
+    //    ingredients = await _httpIngredient.GetAllAsync();
+    //}
 }

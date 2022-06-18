@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AnswerRepository.cs" />
+    <Compile Remove="AnswerResponseRepository.cs" />
+    <Compile Remove="OrderStatusRepository.cs" />
+    <Compile Remove="TopicRepository.cs" />
+    <Compile Remove="WineCommentRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
   </ItemGroup>
 

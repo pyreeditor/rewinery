@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.WineGroup.CategoriesDtos;
+using Rewinery.Shared.WineGroup.Category;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8602, CS8604
     public class CategoryRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -17,36 +18,51 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        public async Task<CategoryReadDto> GetAsync(int id)
+        #region get
+        public async Task<CategoryDto> GetAsync(int id)
         {
-            var obj = _mapper.Map<CategoryReadDto>(await _ctx.Categories.FirstOrDefaultAsync(x => x.Id == id));
-            return obj;
+            return _mapper.Map<CategoryDto>(await _ctx.Categories.FirstAsync(x => x.Id == id));
         }
 
-        public async Task<IEnumerable<CategoryReadDto>> GetAllAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<CategoryReadDto>>(await _ctx.Categories.ToListAsync());
+            return _mapper.Map<IEnumerable<CategoryDto>>(await _ctx.Categories.ToListAsync());
         }
+        #endregion
 
-        public async Task<string> CreateAsync(CategoryCreateDto categoryobj)
+        #region create
+        public async Task<int> CreateAsync(CreateCategoryDto ccd)
         {
-            var newcategory = _mapper.Map<Category>(categoryobj);
-            newcategory.Name = categoryobj.Name;
-            await _ctx.Categories.AddAsync(newcategory);
+            var category = _mapper.Map<Category>(ccd);
+
+            await _ctx.Categories.AddAsync(category);
             await _ctx.SaveChangesAsync();
-            return newcategory.Id.ToString();
+
+            return category.Id;
         }
-        public async Task DeleteAsync(int id)
+        #endregion
+
+        #region update
+        public async Task<CategoryDto> UpdateAsync(CategoryDto cd)
+        {
+            var category = _ctx.Categories.Find(cd.Id);
+
+            category.Name = cd.Name;
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<CategoryDto>(category);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
         {
             _ctx.Categories.Remove(await _ctx.Categories.FindAsync(id));
             await _ctx.SaveChangesAsync();
-        }
 
-        public async Task UpdateAsync(CategoryUpdateDto categoryobj)
-        {
-            var category = _ctx.Categories.Find(categoryobj.Id);
-            category.Name = categoryobj.Name;
-            await _ctx.SaveChangesAsync();
+            return 200;
         }
+        #endregion
     }
 }

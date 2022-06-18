@@ -1,30 +1,30 @@
-﻿@page "/wine-recipes"
+﻿@page "/recipes"
 
 @using Rewinery.Client.Shared.Components
 @using Rewinery.Client.Infrastructure
-@using Rewinery.Shared.WineGroup.WinesDtos
+@using Rewinery.Shared.WineGroup.WineRecipePage
 
-@inject HttpCategoriesRepository _httpCategories
+@inject HttpWineRepository _httpWine
 
 <div class="wine-recipes-bg-animation" style="min-height: 100vh; height: fit-content; width: 100%;">
     <div class="row" style="--bs-gutter-x: unset; padding-bottom: 50px;">
         <div class="col-3">
             <div class="container overflow-hidden wr-pt">
-                <WineRecipeFilters />
+                @*<WineRecipeFilters />*@
             </div>
         </div>
         <div class="col-9">
             <div class="container overflow-hidden wr-pt">
                 <div class="row gy-5 wr-mb">
-                   @* @if (recipes != null)
+                    @if (recipes != null)
                     {
                         @foreach (var recipe in recipes)
                         {
                             <div class="col-4">
-                                <WineRecipeCard wine="recipe" />
+                                <WineRecipeCard Wine="recipe" />
                             </div>
                         }
-                    }*@
+                    }
                 </div>
             </div>
         </div>
@@ -37,10 +37,10 @@
 </div>
 
 @code {
-    //public IEnumerable<WineRecipePageReadDto>? recipes;
+    public IEnumerable<ShortWineDto>? recipes;
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    recipes = await _httpCategories.GetAllAsync();
-    //}
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await _httpWine.GetAllShortAsync();
+    }
 }

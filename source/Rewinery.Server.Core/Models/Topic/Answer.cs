@@ -2,6 +2,7 @@
 
 namespace Rewinery.Server.Core.Models.Topics
 {
+#pragma warning disable CS8618
     public class Answer : BaseEntity
     {
         public Topic Topic { get; set; }
@@ -11,6 +12,6 @@ namespace Rewinery.Server.Core.Models.Topics
 
         public ICollection<AnswerResponse>? AnswerResponces { get; set; }
 
-        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime? Created { get; set; } = DateTime.Now;
     }
 }

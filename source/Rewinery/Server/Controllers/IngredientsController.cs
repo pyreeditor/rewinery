@@ -1,50 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rewinery.Server.Infrastructure;
-using Rewinery.Shared.WineGroup.IngredientsDtos;
+using Rewinery.Shared.WineGroup.Ingredient;
 
 namespace Rewinery.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class IngredientsController
+    [Route("api/[controller]")]
+    public class IngredientsController : Controller
     {
         private readonly IngredientRepository _ingredientRepository;
 
-        public IngredientsController(IngredientRepository ingredientRepository)
-        {
-            _ingredientRepository = ingredientRepository;
-        }
+        public IngredientsController(IngredientRepository ingredientRepository) => _ingredientRepository = ingredientRepository;
 
-        [Route("/api/ingredients/{id}")]
+        #region get
         [HttpGet]
-        public async Task<IngredientReadDto> GetAsync(int id)
+        [Route("/api/ingredients/{id}")]
+        public async Task<IngredientDto> GetAsync(int id)
         {
             return await _ingredientRepository.GetAsync(id);
         }
+
         [HttpGet]
-        public async Task<IEnumerable<IngredientReadDto>> GetListAsync()
+        public async Task<IEnumerable<IngredientDto>> GetListAsync()
         {
             return await _ingredientRepository.GetAllAsync();
         }
+        #endregion
 
+        #region create
         [HttpPost]
-        public async Task<string> CreateAsync(IngredientCreateDto ingredient)
+        public async Task<int> CreateAsync(CreateIngredientDto ingredient)
         {
             return await _ingredientRepository.CreateAsync(ingredient);
         }
+        #endregion
 
+        #region update
+        [HttpPut]
+        public async Task<IngredientDto> UpdateAsync(UpdateIngredientDto ingredient)
+        {
+            return await _ingredientRepository.UpdateASync(ingredient);
+        }
+        #endregion
+
+        #region delete
         [HttpDelete]
+        [Route("/api/ingredients/{id}")]
         public async Task<int> DeleteAsync(int id)
         {
-            await _ingredientRepository.DeleteAsync(id);
-            return id;
+            return await _ingredientRepository.DeleteAsync(id);
         }
-
-        [HttpPut]
-        public async Task<int> UpdateAsync(IngredientUpdateDto ingredientobj)
-        {
-            await _ingredientRepository.UpdateASync(ingredientobj);
-            return ingredientobj.Id;
-        }
+        #endregion
     }
 }

@@ -1,58 +1,64 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rewinery.Server.Core.Models.Wines;
 using Rewinery.Server.Infrastructure;
-using Rewinery.Shared.WineGroup.WinesDtos;
+using Rewinery.Shared.WineGroup.Wine;
+using Rewinery.Shared.WineGroup.WineRecipePage;
 
 namespace Rewinery.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class WinesController
+    [Route("api/[controller]")]
+    public class WinesController : Controller
     {
         private readonly WineRepository _wineRepository;
 
-        public WinesController(WineRepository wineRepository)
-        {
-            _wineRepository = wineRepository;
-        }
+        public WinesController(WineRepository wineRepository) => _wineRepository = wineRepository;
 
-        [Route("/api/wines/{id}")]
+        #region get
         [HttpGet]
-        public async Task<WineRecipePageReadDto> GetAsync(int id)
+        [Route("/api/wines/{id}")]
+        public async Task<WineDto> GetAsync(int id)
         {
             return await _wineRepository.GetAsync(id);
         }
+
         [HttpGet]
-        public async Task<IEnumerable<WineRecipePageReadDto>> GetListAsync()
+        [Route("/api/wines/short")]
+        public async Task<IEnumerable<ShortWineDto>> GetShortListAsync()
         {
-            return await _wineRepository.GetAllAsync();
-        }
-        [Route("/api/GetListByUserNameAsync/{userName}")]
-        [HttpGet]
-        public async Task<IEnumerable<WineRecipePageReadDto>> GetListByUserNameAsync(string userName)
-        {
-            return await _wineRepository.GetAllByUserNameAsync(userName);
+            return await _wineRepository.GetAllShortAsync();
         }
 
+        [HttpGet]
+        [Route("/api/wines/short/{user}")]
+        public async Task<IEnumerable<ShortWineDto>> GetByUserNameAsync(string user)
+        {
+            return await _wineRepository.GetAllByUserNameAsync(user);
+        }
+        #endregion
+
+        #region create
         [HttpPost]
-        public async Task<int> CreateAsync(WineCreateDto wine)
+        public async Task<int> CreateAsync(CreateWineDto wine)
         {
             return await _wineRepository.CreateAsync(wine);
         }
+        #endregion
 
-        [Route("/api/wines/delete/{id}")]
+        #region update
+        [HttpPut]
+        public async Task<WineDto> UpdateAsync(UpdateWineDto wine)
+        {
+            return await _wineRepository.UpdateAsync(wine);
+        }
+        #endregion
+
+        #region delete
         [HttpDelete]
+        [Route("/api/wines/{id}")]
         public async Task<int> DeleteAsync(int id)
         {
-            await _wineRepository.DeleteAsync(id);
-            return id;
+            return await _wineRepository.DeleteAsync(id);
         }
-        
-        [HttpPut]
-        public async Task<int> UpdateAsync(WineUpdateDto wineobj)
-        {
-            await _wineRepository.UpdateAsync(wineobj);
-            return wineobj.Id;
-        }
+        #endregion
     }
 }

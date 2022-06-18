@@ -2,9 +2,9 @@
 
 namespace Rewinery.Server.Core.Models.Wines
 {
+    #pragma warning disable CS8618
     public class Grape : BaseEntity
     {
-        #pragma warning disable CS8618
         /// <summary>
         /// Grape variety name
         /// </summary>
@@ -29,6 +29,5 @@ namespace Rewinery.Server.Core.Models.Wines
         /// Subcategory name (dry, sweet, semi-sweet...)
         /// </summary>
         public Subcategory Subcategory { get; set; }
-        #pragma warning restore CS8618
     }
 }

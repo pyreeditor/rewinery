@@ -1,5 +1,4 @@
 ﻿using Rewinery.Server.Core.Models.Base;
-using Rewinery.Server.Core.Models.Comment;
 
 namespace Rewinery.Server.Core.Models.Wines
 {
@@ -44,7 +43,7 @@ namespace Rewinery.Server.Core.Models.Wines
         /// <summary>
         /// Collection of the comment to this recipe
         /// </summary>
-        public ICollection<WineComment>? Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
         /// <summary>
         /// Availability of the wine recipe (This recipe is available to everyone or private)

@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Wines;
-using Rewinery.Shared.WineGroup.SubcategoriesDtos;
+using Rewinery.Shared.WineGroup.Subcategory;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8602, CS8604
     public class SubcategoryRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -17,36 +18,52 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        public async Task<SubcategoryReadDto> GetAsync(int id)
+        #region get
+        public async Task<SubcategoryDto> GetAsync(int id)
         {
-            var obj = _mapper.Map<SubcategoryReadDto>(await _ctx.Subcategories.FirstOrDefaultAsync(x => x.Id == id));
-            return obj;
+            return _mapper.Map<SubcategoryDto>(await _ctx.Subcategories.FirstAsync(x => x.Id == id));
         }
 
-        public async Task<IEnumerable<SubcategoryReadDto>> GetAllAsync()
+        public async Task<IEnumerable<SubcategoryDto>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<SubcategoryReadDto>>(await _ctx.Subcategories.ToListAsync());
+            return _mapper.Map<IEnumerable<SubcategoryDto>>(await _ctx.Subcategories.ToListAsync());
         }
+        #endregion
 
-        public async Task<string> CreateAsync(SubcategoryCreateDto subcategoryobj)
+        #region create
+        public async Task<int> CreateAsync(CreateSubcategoryDto csd)
         {
-            var newSubcategory = _mapper.Map<Subcategory>(subcategoryobj);
-            newSubcategory.Name = subcategoryobj.Name;
-            await _ctx.Subcategories.AddAsync(newSubcategory);
+            var subcategory = _mapper.Map<Subcategory>(csd);
+
+            await _ctx.Subcategories.AddAsync(subcategory);
             await _ctx.SaveChangesAsync();
-            return newSubcategory.Id.ToString();
+
+            return subcategory.Id;
         }
-        public async Task DeleteAsync(int id)
+        #endregion
+
+        #region update
+        public async Task<SubcategoryDto> UpdateAsync(SubcategoryDto sd)
+        {
+            var subcategory = _ctx.Subcategories.Find(sd.Id);
+
+            subcategory.Name = sd.Name;
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<SubcategoryDto>(subcategory);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
         {
             _ctx.Subcategories.Remove(await _ctx.Subcategories.FindAsync(id));
-            await _ctx.SaveChangesAsync();
-        }
 
-        public async Task UpdateAsync(SubcategoryUpdateDto subcategoryobj)
-        {
-            var subcategory = _ctx.Subcategories.Find(subcategoryobj.Id);
-            subcategory.Name = subcategoryobj.Name;
             await _ctx.SaveChangesAsync();
+
+            return 200;
         }
+        #endregion
     }
 }
