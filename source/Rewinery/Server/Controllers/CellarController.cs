@@ -5,7 +5,7 @@ using Rewinery.Shared.CellarGroup.Cellar;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/cellar")]
     public class CellarController : Controller
     {
         private readonly CellarRepository _cellarRepository;

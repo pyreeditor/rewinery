@@ -6,7 +6,7 @@ using Rewinery.Shared.WineGroup.WineRecipePage;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("/api/wines")]
     public class WinesController : Controller
     {
         private readonly WineRepository _wineRepository;

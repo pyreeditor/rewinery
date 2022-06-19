@@ -5,7 +5,7 @@ using Rewinery.Shared.WineGroup.Grape;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/grapes")]
     public class GrapesController : Controller
     {
         private readonly GrapeRepository _grapeRepository;
@@ -21,7 +21,7 @@ namespace Rewinery.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<GrapeDto>> GetListAsync()
+        public async Task<IEnumerable<GrapeDto>> GetAllAsync()
         {
             return await _grapeRepository.GetAllAsync();
         }

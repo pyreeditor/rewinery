@@ -5,7 +5,7 @@ using Rewinery.Shared.WineGroup.Comment.Response;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/commentresponses")]
     public class CommentResponsesController
     {
         private readonly CommentResponseRepository _commentResponseRepository;

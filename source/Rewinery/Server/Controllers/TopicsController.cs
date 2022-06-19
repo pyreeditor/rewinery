@@ -6,7 +6,7 @@ using Rewinery.Shared.TopicGroup.TopicPage;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/topics")]
     public class TopicsController : Controller
     {
         private readonly TopicRepository _topicRepository;

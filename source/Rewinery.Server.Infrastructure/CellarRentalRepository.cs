@@ -47,6 +47,19 @@ namespace Rewinery.Server.Infrastructure
                 .Include(x => x.Wine).ThenInclude(x => x.Ingredients)
                 .ToListAsync());
         }
+
+        public async Task<IEnumerable<CellarRentalDto>> GetAllByUserNameAsync(string user)
+        {
+            return _mapper.Map<IEnumerable<CellarRentalDto>>(await _ctx.CellarRentals
+                .Include(x => x.Owner)
+                .Include(x => x.Cellar)
+                .Include(x => x.Wine).ThenInclude(x => x.Grape)
+                .Include(x => x.Wine).ThenInclude(x => x.Grape).ThenInclude(x => x.Category)
+                .Include(x => x.Wine).ThenInclude(x => x.Grape).ThenInclude(x => x.Subcategory)
+                .Include(x => x.Wine).ThenInclude(x => x.Ingredients)
+                .Where(x => x.Owner.UserName == user)
+                .ToListAsync());
+        }
         #endregion
 
         #region create

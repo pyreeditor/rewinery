@@ -5,7 +5,7 @@ using Rewinery.Shared.OrderGroup.Orders;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/order")]
     public class OrderController
     {
         private readonly OrderRepository _orderRepository;

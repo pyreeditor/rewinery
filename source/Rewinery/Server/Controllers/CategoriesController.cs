@@ -5,7 +5,7 @@ using Rewinery.Shared.WineGroup.Category;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     public class CategoriesController : Controller
     {
         private readonly CategoryRepository _categoryRepository;
@@ -21,7 +21,7 @@ namespace Rewinery.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CategoryDto>> GetListAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
         {
             return await _categoryRepository.GetAllAsync();
         }

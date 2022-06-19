@@ -5,7 +5,7 @@ using Rewinery.Shared.CellarGroup.Rental;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/cellarrental")]
     public class CellarRentalController : Controller
     {
         private readonly CellarRentalRepository _cellarRentalRepository;
@@ -24,6 +24,13 @@ namespace Rewinery.Server.Controllers
         public async Task<IEnumerable<CellarRentalDto>> GetListAsync()
         {
             return await _cellarRentalRepository.GetAllAsync();
+        }
+
+        [HttpGet]
+        [Route("/api/cellarrental/{user}")]
+        public async Task<IEnumerable<CellarRentalDto>> GetAllByUserNameAsync(string user)
+        {
+            return await _cellarRentalRepository.GetAllByUserNameAsync(user);
         }
         #endregion
 

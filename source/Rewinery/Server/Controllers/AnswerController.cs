@@ -5,7 +5,7 @@ using Rewinery.Shared.TopicGroup.Answer;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/answers")]
     public class AnswersController
     {
         private readonly AnswerRepository _answerRepository;

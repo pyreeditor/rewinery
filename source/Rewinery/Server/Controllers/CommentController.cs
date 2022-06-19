@@ -6,7 +6,7 @@ using Rewinery.Shared.WineGroup.Comment;
 namespace Rewinery.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/comment")]
     public class CommentController : Controller
     {
         private readonly CommentRepository _commentRepository;
@@ -22,7 +22,7 @@ namespace Rewinery.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CommentDto>> GetListAsync()
+        public async Task<IEnumerable<CommentDto>> GetAllAsync()
         {
             return await _commentRepository.GetAllAsync();
         }
