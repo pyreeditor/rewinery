@@ -2,15 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Topics;
-using Rewinery.Shared.TopicGroup.TopicsDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rewinery.Shared.TopicGroup.Topic;
+using Rewinery.Shared.TopicGroup.TopicPage;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8601, CS8602, CS8604, CS8620
     public class TopicRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -22,61 +19,68 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        //public async Task<TopicListPageDto> GetTopicListPageItemAsync(int id)
-        //{
-        //    return _mapper.Map<TopicListPageDto>(await _ctx.Topics
-        //        .Include(x => x.User)
-        //        .FirstOrDefaultAsync(x => x.Id == id));
-        //}
-        public async Task<IEnumerable<ShortTopicInfoDto>> GetAllShortTopicInfoAsync()
+        #region get
+        public async Task<TopicDto> GetAsync(int id)
         {
-            return _mapper.Map<IEnumerable<ShortTopicInfoDto>>(await _ctx.Topics
+            return _mapper.Map<TopicDto>(await _ctx.Topics
                 .Include(x => x.User)
-                .ToListAsync());
-        }
-
-        public async Task<TopicPageDto> GetTopicPageAsync(int id)
-        {
-            
-            return _mapper.Map<TopicPageDto>(await _ctx.Topics
-                .Include(x => x.Answers).ThenInclude(x=>x.AnswerResponces).ThenInclude(x => x.User)
-                .Include(x => x.User)
-                .FirstOrDefaultAsync(x => x.Id == id));
-        }
-
-        public async Task<IEnumerable<TopicPageDto>> GetAllTopicPageAsync()
-        {
-            return _mapper.Map<IEnumerable<TopicPageDto>>(await _ctx.Topics
+                .Include(x => x.Answers).ThenInclude(x => x.User)
                 .Include(x => x.Answers).ThenInclude(x => x.AnswerResponces).ThenInclude(x => x.User)
+                .FirstAsync(x => x.Id == id));
+        }
+
+        public async Task<IEnumerable<ShortTopicDto>> GetAllShortAsync()
+        {
+            return _mapper.Map<IEnumerable<ShortTopicDto>>(await _ctx.Topics
+                .Include(x => x.User).ToListAsync());
+        }
+
+        public async Task<IEnumerable<ShortTopicDto>> GetAllByUserNameAsync(string user)
+        {
+            return _mapper.Map<IEnumerable<ShortTopicDto>>(await _ctx.Topics
                 .Include(x => x.User)
-                .ToListAsync());
+                .Where(x => x.User.UserName == user).ToListAsync());
         }
+        #endregion
 
-        public async Task DeleteAsync(int id)
+        #region create
+        public async Task<int> CreateAsync(CreateTopicDto ctd)
         {
-            _ctx.Topics.Remove(_ctx.Topics.Find(id));
-            await _ctx.SaveChangesAsync();
-        }
+            var topic = _mapper.Map<Topic>(ctd);
 
-        public async Task<int> CreateAsync(TopicCreateDto topicCreateDto)
-        {
-            var nTopic = _mapper.Map<Topic>(topicCreateDto);
-            nTopic.Created = DateTime.Now;
-            nTopic.Description = topicCreateDto.Description;
-            nTopic.Title = topicCreateDto.Title;
-            nTopic.User = _ctx.Users.FirstOrDefault(x => x.UserName == topicCreateDto.OwnerUserName);
-            await _ctx.Topics.AddAsync(nTopic);
-            await _ctx.SaveChangesAsync();
-            return nTopic.Id;
-        }
+            topic.User = _ctx.Users.First(x => x.UserName == ctd.UserName);
+            topic.Created = DateTime.Now;
 
-        public async Task<int> UpdateAsync(TopicUpdateDto updateDto)
-        {
-            var topic = _ctx.Topics.Find(updateDto.Id);
-            topic.Description = updateDto.Description;
-            topic.Title = updateDto.Title;
+            await _ctx.Topics.AddAsync(topic);
             await _ctx.SaveChangesAsync();
+
             return topic.Id;
         }
+        #endregion
+
+        #region update
+        public async Task<TopicDto> UpdateAsync(UpdateTopicDto utd)
+        {
+            var topic = _ctx.Topics.Find(utd.Id);
+
+            topic.Title = utd.Title;
+            topic.Description = utd.Description;
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<TopicDto>(topic);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
+        {
+            _ctx.Topics.Remove(_ctx.Topics.Find(id));
+
+            await _ctx.SaveChangesAsync();
+
+            return 200;
+        }
+        #endregion
     }
 }

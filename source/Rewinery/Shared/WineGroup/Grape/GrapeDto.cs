@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Rewinery.Shared.WineGroup.Grape
 {
     #pragma warning disable CS8618
-    public class GrapeDto
+    public class GrapeDto : BaseDto
     {
         /// <summary>
         /// Grape name

@@ -44,7 +44,6 @@ namespace Rewinery.Server.Infrastructure
         #region create
         public async Task<int> CreateAsync(CreateCommentDto ccd)
         {
-            //var comment = _mapper.Map<Comment>(ccd);
             var comment = new Comment();
 
             comment.User = _ctx.Users.First(x => x.UserName == ccd.User);

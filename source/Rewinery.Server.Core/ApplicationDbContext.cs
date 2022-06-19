@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Rewinery.Server.Core.Models;
-using Rewinery.Server.Core.Models.Cellar;
+using Rewinery.Server.Core.Models.Cellars;
 using Rewinery.Server.Core.Models.Orders;
 using Rewinery.Server.Core.Models.Topics;
 using Rewinery.Server.Core.Models.Wines;

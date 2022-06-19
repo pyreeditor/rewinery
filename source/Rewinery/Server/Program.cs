@@ -32,6 +32,16 @@ builder.Services.AddScoped<SubcategoryRepository>();
 builder.Services.AddScoped<IngredientRepository>();
 builder.Services.AddScoped<CommentRepository>();
 builder.Services.AddScoped<CommentResponseRepository>();
+
+builder.Services.AddScoped<TopicRepository>();
+builder.Services.AddScoped<AnswerRepository>();
+builder.Services.AddScoped<AnswerResponseRepository>();
+
+builder.Services.AddScoped<OrderRepository>();
+builder.Services.AddScoped<OrderStatusRepository>();
+
+builder.Services.AddScoped<CellarRepository>();
+builder.Services.AddScoped<CellarRentalRepository>();
 #endregion
 
 builder.Services.AddControllersWithViews();

@@ -2,9 +2,9 @@
 
 namespace Rewinery.Server.Core.Models.Wines
 {
+    #pragma warning disable CS8618
     public class Wine : BaseEntity
     {
-    #pragma warning disable CS8618
         /// <summary>
         /// Information about the user who owns this recipe
         /// </summary>
@@ -49,6 +49,5 @@ namespace Rewinery.Server.Core.Models.Wines
         /// Availability of the wine recipe (This recipe is available to everyone or private)
         /// </summary>
         public bool Public { get; set; }
-    #pragma warning restore CS8618
     }
 }

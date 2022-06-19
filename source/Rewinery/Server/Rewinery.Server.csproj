@@ -10,7 +10,6 @@
   <ItemGroup>
     <Compile Remove="Controllers\AnswerResponsesController.cs" />
     <Compile Remove="Controllers\AnswersController.cs" />
-    <Compile Remove="Controllers\TopicsController.cs" />
     <Compile Remove="Controllers\WineCommentsController.cs" />
   </ItemGroup>
 

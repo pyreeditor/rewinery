@@ -1,13 +1,8 @@
 ﻿using Rewinery.Server.Core.Models.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rewinery.Server.Core.Models.Wines
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CommentResponse : BaseEntity
     {
         /// <summary>
@@ -25,6 +20,6 @@ namespace Rewinery.Server.Core.Models.Wines
         /// </summary>
         public string Text { get; set; }
 
-        public DateTime? Created { get; set; } = DateTime.Now;
+        public DateTime? Created { get; set; }
     }
 }

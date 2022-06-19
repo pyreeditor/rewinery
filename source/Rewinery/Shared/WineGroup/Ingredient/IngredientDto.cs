@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Rewinery.Shared.WineGroup.Ingredient
 {
     #pragma warning disable CS8618
-    public class IngredientDto
+    public class IngredientDto : BaseDto
     {
         /// <summary>
         /// Ingredient name
@@ -18,5 +18,7 @@ namespace Rewinery.Shared.WineGroup.Ingredient
         /// Ingredient icon
         /// </summary>
         public string Icon { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

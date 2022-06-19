@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="AnswerRepository.cs" />
-    <Compile Remove="AnswerResponseRepository.cs" />
-    <Compile Remove="OrderStatusRepository.cs" />
-    <Compile Remove="TopicRepository.cs" />
     <Compile Remove="WineCommentRepository.cs" />
   </ItemGroup>
 

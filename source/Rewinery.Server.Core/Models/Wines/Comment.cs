@@ -2,7 +2,7 @@
 
 namespace Rewinery.Server.Core.Models.Wines
 {
-#pragma warning disable CS8618
+    #pragma warning disable CS8618
     public class Comment : BaseEntity
     {
         /// <summary>
@@ -28,6 +28,6 @@ namespace Rewinery.Server.Core.Models.Wines
         /// <summary>
         /// Comment creation time
         /// </summary>
-        public DateTime? Created { get; set; } = DateTime.Now;
+        public DateTime? Created { get; set; }
     }
 }

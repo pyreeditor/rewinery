@@ -38,9 +38,9 @@ namespace Rewinery.Server.Controllers
 
         #region update
         [HttpPut]
-        public async Task<SubcategoryDto> UpdateAsync(SubcategoryDto subcategoryobj)
+        public async Task<SubcategoryDto> UpdateAsync(SubcategoryDto subcategory)
         {
-            return await _subcategoryRepository.UpdateAsync(subcategoryobj);
+            return await _subcategoryRepository.UpdateAsync(subcategory);
         }
         #endregion
 

@@ -2,10 +2,9 @@
 
 namespace Rewinery.Server.Core.Models.Orders
 {
+    #pragma warning disable CS8618
     public class OrderStatus : BaseEntity
     {
-        #pragma warning disable CS8618
         public string Status { get; set; }
-        #pragma warning restore CS8618
     }
 }

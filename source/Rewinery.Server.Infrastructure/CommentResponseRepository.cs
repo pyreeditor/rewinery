@@ -35,7 +35,6 @@ namespace Rewinery.Server.Infrastructure
         #region create
         public async Task<int> CreateAsync(CreateComResponseDto ccrd)
         {
-            //var commentResponse = _mapper.Map<CommentResponse>(ccrd);
             var commentResponse = new CommentResponse();
 
             commentResponse.Comment = _ctx.Comments.Find(ccrd.CommentId);

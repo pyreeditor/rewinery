@@ -23,14 +23,14 @@ namespace Rewinery.Server.Controllers
 
         [HttpGet]
         [Route("/api/wines/short")]
-        public async Task<IEnumerable<ShortWineDto>> GetShortListAsync()
+        public async Task<IEnumerable<ShortWineDto>> GetAllShortAsync()
         {
             return await _wineRepository.GetAllShortAsync();
         }
 
         [HttpGet]
         [Route("/api/wines/short/{user}")]
-        public async Task<IEnumerable<ShortWineDto>> GetByUserNameAsync(string user)
+        public async Task<IEnumerable<ShortWineDto>> GetAllByUserNameAsync(string user)
         {
             return await _wineRepository.GetAllByUserNameAsync(user);
         }

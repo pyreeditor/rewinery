@@ -387,7 +387,7 @@ namespace Rewinery.Server.Core.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellar.Cellar", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellars.Cellar", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -407,7 +407,7 @@ namespace Rewinery.Server.Core.Migrations
                     b.ToTable("Cellars");
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellar.CellarRental", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellars.CellarRental", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -415,7 +415,7 @@ namespace Rewinery.Server.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CellarId")
+                    b.Property<int>("CellarId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndRental")
@@ -506,12 +506,12 @@ namespace Rewinery.Server.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AnswerText")
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
@@ -539,10 +539,10 @@ namespace Rewinery.Server.Core.Migrations
                     b.Property<int>("AnswerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ResponseText")
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -566,7 +566,7 @@ namespace Rewinery.Server.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -846,11 +846,13 @@ namespace Rewinery.Server.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellar.CellarRental", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellars.CellarRental", b =>
                 {
-                    b.HasOne("Rewinery.Server.Core.Models.Cellar.Cellar", null)
+                    b.HasOne("Rewinery.Server.Core.Models.Cellars.Cellar", "Cellar")
                         .WithMany("CellarRental")
-                        .HasForeignKey("CellarId");
+                        .HasForeignKey("CellarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Rewinery.Server.Core.Models.ApplicationUser", "Owner")
                         .WithMany()
@@ -861,6 +863,8 @@ namespace Rewinery.Server.Core.Migrations
                         .HasForeignKey("WineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Cellar");
 
                     b.Navigation("Owner");
 
@@ -1012,7 +1016,7 @@ namespace Rewinery.Server.Core.Migrations
                     b.Navigation("Wines");
                 });
 
-            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellar.Cellar", b =>
+            modelBuilder.Entity("Rewinery.Server.Core.Models.Cellars.Cellar", b =>
                 {
                     b.Navigation("CellarRental");
                 });

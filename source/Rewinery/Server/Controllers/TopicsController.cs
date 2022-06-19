@@ -1,61 +1,64 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Rewinery.Server.Core;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rewinery.Server.Infrastructure;
-using Rewinery.Shared.TopicGroup.TopicsDtos;
+using Rewinery.Shared.TopicGroup.Topic;
+using Rewinery.Shared.TopicGroup.TopicPage;
 
 namespace Rewinery.Server.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class TopicsController
+    [Route("api/[controller]")]
+    public class TopicsController : Controller
     {
         private readonly TopicRepository _topicRepository;
 
-        public TopicsController(TopicRepository topicRepository)
+        public TopicsController(TopicRepository topicRepository) => _topicRepository = topicRepository;
+
+        #region get
+        [HttpGet]
+        [Route("/api/topics/{id}")]
+        public async Task<TopicDto> GetAsync(int id)
         {
-            _topicRepository = topicRepository;
+            return await _topicRepository.GetAsync(id);
         }
 
-        [Route("/api/Topic/{id}")]
         [HttpGet]
-        public async Task<TopicPageDto> GetAsync(int id)
+        [Route("/api/topic/short")]
+        public async Task<IEnumerable<ShortTopicDto>> GetAllShortAsync()
         {
-            return await _topicRepository.GetTopicPageAsync(id);
-        }
-        [Route("/api/GetShortTopicInfo/{id}")]
-        [HttpGet]
-        public async Task<IEnumerable<ShortTopicInfoDto>> GetListShortTopicInfoAsync()
-        {
-            return await _topicRepository.GetAllShortTopicInfoAsync();
+            return await _topicRepository.GetAllShortAsync();
         }
 
-        [Route("/api/GetListTopics/{id}")]
         [HttpGet]
-        public async Task<IEnumerable<TopicPageDto>> GetListTopicPageDtoAsync()
+        [Route("/api/topic/short/{user}")]
+        public async Task<IEnumerable<ShortTopicDto>> GetAllByUserNameAsync(string user)
         {
-            return await _topicRepository.GetAllTopicPageAsync();
+            return await _topicRepository.GetAllByUserNameAsync(user);
         }
+        #endregion
 
-        [Route("/api/topic/delete/{id}")]
+        #region create
+        [HttpPost]
+        public async Task<int> CreateAsync(CreateTopicDto topic)
+        {
+            return await _topicRepository.CreateAsync(topic);
+        }
+        #endregion
+
+        #region update
+        [HttpPut]
+        public async Task<TopicDto> UpdateAsync(UpdateTopicDto topic)
+        {
+            return await _topicRepository.UpdateAsync(topic);
+        }
+        #endregion
+
+        #region delete
         [HttpDelete]
+        [Route("/api/topics/{id}")]
         public async Task<int> DeleteAsync(int id)
         {
-            await _topicRepository.DeleteAsync(id);
-            return id;
+            return await _topicRepository.DeleteAsync(id);
         }
-
-        [HttpPut]
-        public async Task<int> UpdateAsync(TopicUpdateDto wineobj)
-        {
-            await _topicRepository.UpdateAsync(wineobj);
-            return wineobj.Id;
-        }
-
-        [HttpPost]
-        public async Task<int> CreateAsync(TopicCreateDto answerDto)
-        {
-            return await _topicRepository.CreateAsync(answerDto);
-        }
+        #endregion
     }
 }

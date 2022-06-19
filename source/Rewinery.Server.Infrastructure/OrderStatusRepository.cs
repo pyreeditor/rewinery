@@ -2,15 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Rewinery.Server.Core;
 using Rewinery.Server.Core.Models.Orders;
-using Rewinery.Shared.OrderGroup.OrderStatusDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Rewinery.Shared.OrderGroup.OrderStatus;
 
 namespace Rewinery.Server.Infrastructure
 {
+    #pragma warning disable CS8601, CS8602, CS8604, CS8620
     public class OrderStatusRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -22,29 +18,50 @@ namespace Rewinery.Server.Infrastructure
             _mapper = mapper;
         }
 
-        public async Task<OrderStatusReadDto> GetAsync(int id)
+        #region get
+        public async Task<OrderStatusDto> GetAsync(int id)
         {
-            return _mapper.Map<OrderStatusReadDto>(await _ctx.OrderStatuses
-                .FirstOrDefaultAsync(x => x.Id == id));
-        }
-        public async Task<IEnumerable<OrderStatusReadDto>> GetAllAsync()
-        {
-            return _mapper.Map<IEnumerable<OrderStatusReadDto>>(await _ctx.OrderStatuses
-                .ToListAsync());
-        }
-        public async Task DeleteAsync(int id)
-        {
-            _ctx.OrderStatuses.Remove(_ctx.OrderStatuses.Find(id));
-            await _ctx.SaveChangesAsync();
+            return _mapper.Map<OrderStatusDto>(await _ctx.OrderStatuses.FindAsync(id));
         }
 
-        public async Task<int> CreateAsync(OrderStatusCreateDto createDto)
+        public async Task<IEnumerable<OrderStatusDto>> GetAllAsync()
         {
-            var nOrderStatus = _mapper.Map<OrderStatus>(createDto);
-            nOrderStatus.Status = createDto.Status;
-            await _ctx.OrderStatuses.AddAsync(nOrderStatus);
-            await _ctx.SaveChangesAsync();
-            return nOrderStatus.Id;
+            return _mapper.Map<IEnumerable<OrderStatusDto>>(await _ctx.OrderStatuses.ToListAsync());
         }
+        #endregion
+
+        #region create
+        public async Task<int> CreateAsync(CreateOrderStatusDto cosd)
+        {
+            var status = _mapper.Map<OrderStatus>(cosd);
+
+            await _ctx.OrderStatuses.AddAsync(status);
+            await _ctx.SaveChangesAsync();
+
+            return status.Id;
+        }
+        #endregion
+
+        #region update
+        public async Task<OrderStatusDto> UpdateAsync(OrderStatusDto uosd)
+        {
+            var status = _ctx.OrderStatuses.Find(uosd.Id).Status = uosd.Status;
+
+            await _ctx.SaveChangesAsync();
+
+            return _mapper.Map<OrderStatusDto>(status);
+        }
+        #endregion
+
+        #region delete
+        public async Task<int> DeleteAsync(int id)
+        {
+            _ctx.OrderStatuses.Remove(_ctx.OrderStatuses.Find(id));
+
+            await _ctx.SaveChangesAsync();
+
+            return 200;
+        }
+        #endregion
     }
 }

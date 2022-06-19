@@ -21,7 +21,7 @@ namespace Rewinery.Server.Infrastructure
         #region get
         public async Task<SubcategoryDto> GetAsync(int id)
         {
-            return _mapper.Map<SubcategoryDto>(await _ctx.Subcategories.FirstAsync(x => x.Id == id));
+            return _mapper.Map<SubcategoryDto>(await _ctx.Subcategories.FindAsync(id));
         }
 
         public async Task<IEnumerable<SubcategoryDto>> GetAllAsync()

@@ -7,7 +7,7 @@ using Rewinery.Shared.WineGroup.WineRecipePage;
 
 namespace Rewinery.Server.Infrastructure
 {
-    #pragma warning disable CS8620, CS8601, CS8604
+    #pragma warning disable CS8601, CS8604, CS8620
     public class WineRepository
     {
         private readonly ApplicationDbContext _ctx;
@@ -55,14 +55,14 @@ namespace Rewinery.Server.Infrastructure
         /// </summary>
         /// <param name="userName"></param>
         /// <returns>List of objects with abbreviated information about wine</returns>
-        public async Task<IEnumerable<ShortWineDto>> GetAllByUserNameAsync(string userName)
+        public async Task<IEnumerable<ShortWineDto>> GetAllByUserNameAsync(string user)
         {
             return _mapper.Map<IEnumerable<ShortWineDto>>(await _ctx.Wines
                 .Include(x => x.Owner)
                 .Include(x => x.Grape).ThenInclude(x => x.Category)
                 .Include(x => x.Grape).ThenInclude(x => x.Subcategory)
                 .Include(x => x.Ingredients)
-                .Where(x => x.Owner.UserName == userName).ToListAsync());
+                .Where(x => x.Owner.UserName == user).ToListAsync());
         }
         #endregion
 

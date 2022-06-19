@@ -26,7 +26,7 @@ namespace Rewinery.Server.Core.Models
         /// <summary>
         /// Collection of user-owned wine recipes
         /// </summary>
-        public ICollection<Wine>? Wines { get; set; }
+        public ICollection<Wines.Wine>? Wines { get; set; }
 
         public ICollection<Topic>? Topics { get; set; }
     }
