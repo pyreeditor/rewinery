@@ -1,0 +1,33 @@
+﻿@using Rewinery.Shared.TopicGroup.TopicPage
+
+
+<div class="container" style="height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-10 frozen-glass">
+            <div class="" style="">
+                <div class="container pb-3">
+                    <div class="row" style="height: 100px">
+                        <div class="col-4 align-self-start fw-bolder fs-4" style="text-align: left">
+                            <div class="pl-2 mb-3">@Topic.Title</div>
+                            <MudFab StartIcon="@Icons.Filled.ReadMore" Label="Read more" />
+                        </div>
+                        <div class="col-4 align-self-end fw-bolder fs-6 pb-2" style="text-align: center">
+                            <div class="justify-cintent-center">
+                                <span class="mr-2 ">@Topic.Created.Date</span><MudIcon Icon="@Icons.Filled.Today" Title="Date" />
+                            </div>
+                        </div>
+                        <div class="col-4 align-self-end fw-bolder fs-6 pb-2" style="text-align: right">
+                            <span class="mr-2 ">@Topic.User</span><MudIcon awdasd Icon="@Icons.Filled.Person" Title="User" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+[Parameter]
+public ShortTopicDto? Topic { get; set; }
+
+}
