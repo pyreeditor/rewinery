@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rewinery.Shared.WineGroup.Grape
+﻿namespace Rewinery.Shared.WineGroup.Grape
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CreateGrapeDto
     {
         /// <summary>
-        /// Grape variety name
+        /// Grape sort name
         /// </summary>
         public string Name { get; set; }
 
@@ -25,12 +19,12 @@ namespace Rewinery.Shared.WineGroup.Grape
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Category name (red, white, pink)
+        /// The category which includes grapes by color
         /// </summary>
         public int CategoryId { get; set; }
 
         /// <summary>
-        /// Subcategory name (dry, sweet, semi-sweet...)
+        /// Subcategory which includes grapes by sugar content
         /// </summary>
         public int SubcategoryId { get; set; }
     }

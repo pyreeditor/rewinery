@@ -1,13 +1,8 @@
 ﻿using Rewinery.Shared.CellarGroup.Rental;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rewinery.Shared.CellarGroup.Cellar
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CellarDto : BaseDto
     {
         /// <summary>

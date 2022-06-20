@@ -1,10 +1,10 @@
 ﻿namespace Rewinery.Shared.WineGroup.Comment.Response
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class ComResponseDto : BaseDto
     {
         /// <summary>
-        /// Response owner user name
+        /// Username the user who wrote the response
         /// </summary>
         public string User { get; set; }
 

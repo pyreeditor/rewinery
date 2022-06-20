@@ -41,6 +41,11 @@ namespace Rewinery.Client.Infrastructure.HttpWines
         #endregion
 
         #region create
+        /// <summary>
+        /// Request to API to create an wine object
+        /// </summary>
+        /// <param name="wine"></param>
+        /// <returns></returns>
         public async Task CreateAsync(CreateWineDto wine)
         {
             await _httpClient.PostAsJsonAsync($"/api/wines", wine);
@@ -48,6 +53,11 @@ namespace Rewinery.Client.Infrastructure.HttpWines
         #endregion
 
         #region update
+        /// <summary>
+        /// Request to API to update an wine object
+        /// </summary>
+        /// <param name="wine"></param>
+        /// <returns></returns>
         public async Task UpdateAsync(UpdateWineDto wine)
         {
             await _httpClient.PutAsJsonAsync($"/api/wines", wine);
@@ -55,6 +65,11 @@ namespace Rewinery.Client.Infrastructure.HttpWines
         #endregion
 
         #region delete
+        /// <summary>
+        /// Request to API to delete an wine object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task DeleteAsync(string id)
         {
             await _httpClient.DeleteAsync($"/api/wines{id}");

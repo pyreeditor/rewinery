@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rewinery.Shared.WineGroup.Category
+﻿namespace Rewinery.Shared.WineGroup.Category
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CategoryDto : BaseDto
     {
         /// <summary>

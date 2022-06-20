@@ -2,11 +2,11 @@
 
 namespace Rewinery.Shared.WineGroup.Comment
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CommentDto : BaseDto
     {
         /// <summary>
-        /// Comment owner user name
+        /// Username the user who wrote the comment
         /// </summary>
         public string User { get; set; }
 

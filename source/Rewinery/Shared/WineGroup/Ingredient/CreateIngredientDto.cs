@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rewinery.Shared.WineGroup.Ingredient
+﻿namespace Rewinery.Shared.WineGroup.Ingredient
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CreateIngredientDto
     {
         /// <summary>

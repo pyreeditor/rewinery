@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rewinery.Shared.WineGroup.Wine
+﻿namespace Rewinery.Shared.WineGroup.Wine
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CreateWineDto
     {
         /// <summary>
-        /// Wine recipe owner user name
+        /// UserName the owner of the wine
         /// </summary>
         public string UserName { get; set; }
 
         /// <summary>
-        /// Wine recipe name
+        /// Wine name
         /// </summary>
         public string Name { get; set; }
 
@@ -35,7 +29,7 @@ namespace Rewinery.Shared.WineGroup.Wine
         public string Icon { get; set; }
 
         /// <summary>
-        /// Wine grape ID 
+        /// ID  grapes that were part of the wine
         /// </summary>
         public int GrapeId { get; set; }
 

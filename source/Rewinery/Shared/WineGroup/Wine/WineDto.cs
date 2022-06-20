@@ -4,16 +4,16 @@ using Rewinery.Shared.WineGroup.Ingredient;
 
 namespace Rewinery.Shared.WineGroup.Wine
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class WineDto : BaseDto
     {
         /// <summary>
-        /// Wine recipe owner user name
+        /// UserName the owner of the wine
         /// </summary>
         public string Owner { get; set; }
 
         /// <summary>
-        /// Wine recipe name
+        /// Wine name
         /// </summary>
         public string Name { get; set; }
 
@@ -33,7 +33,7 @@ namespace Rewinery.Shared.WineGroup.Wine
         public string Icon { get; set; }
 
         /// <summary>
-        /// Wine grape information
+        /// Information about the grapes used to make wine
         /// </summary>
         public GrapeDto Grape { get; set; }
 

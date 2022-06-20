@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rewinery.Shared.WineGroup.Comment
+﻿namespace Rewinery.Shared.WineGroup.Comment
 {
-    #pragma warning disable CS8618
+#pragma warning disable CS8618
     public class CreateCommentDto
     {
         /// <summary>
-        /// Comment owner user name
+        /// Username the user who wrote the comment
         /// </summary>
         public string User { get; set; }
 

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rewinery.Shared.OrderGroup.Orders
+﻿namespace Rewinery.Shared.OrderGroup.Orders
 {
     public class UpdateOrderDto : BaseDto
     {
+        /// <summary>
+        /// ID the status in which the order is located
+        /// </summary>
         public int StatusId { get; set; }
 
     }
