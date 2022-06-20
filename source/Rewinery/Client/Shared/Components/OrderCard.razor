@@ -1,0 +1,17 @@
+﻿@using Rewinery.Shared.OrderGroup.Orders
+
+@inject NavigationManager _navigation
+
+@if (Order != null)
+{
+ <div class="frozen-glass" style="height: 300px; width: 200px;">
+     @Order.Wine.Owner
+ </div>
+}
+
+@code {
+    [Parameter]
+    public OrderDto? Order { get; set; }
+
+    //public void Move(int id) => _navigation.NavigateTo($"/recipes/{id}");
+}

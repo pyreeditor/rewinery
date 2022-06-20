@@ -18,6 +18,11 @@ namespace Rewinery.Client.Infrastructure.HttpOrder
         {
             return await _httpClient.GetFromJsonAsync<IEnumerable<OrderDto>>($"api/order");
         }
+
+        public async Task<IEnumerable<OrderDto>> GetAllByUserNameAsync(string user)
+        {
+            return await _httpClient.GetFromJsonAsync<IEnumerable<OrderDto>>($"/api/order/byuser/{user}");
+        }
         #endregion
 
         #region create
