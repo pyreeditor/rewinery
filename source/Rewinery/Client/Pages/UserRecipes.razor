@@ -1,7 +1,43 @@
-﻿
-@page "/user-recipes"
-<h3>UserRecipes</h3>
+﻿@page "/{UserName}/recipes"
+
+@using Rewinery.Client.Shared.Components
+@using Rewinery.Client.Infrastructure.HttpWines
+@using Rewinery.Shared.WineGroup.WineRecipePage
+
+@inject HttpWineRepository _httpWine
+
+<div class="user-recipes-bg-animation" style="min-height: 100vh; height: fit-content; width: 100%;">
+    <div class="row" style="--bs-gutter-x: unset; padding-bottom: 50px;">
+        <div class="col-12">
+            <div class="container overflow-hidden wr-pt">
+                <div class="row gy-5 wr-mb">
+                    @if (recipes != null)
+                    {
+                        @foreach (var recipe in recipes)
+                        {
+                            <div class="col-3">
+                                <WineRecipeCard Wine="recipe" />
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between wr-bottom px-5 fix-bottom">
+        <div class="pt-3">©  Rewinery 2022</div>
+        <div class="pt-3">Powered by reeditor, nzrjed</div>
+    </div>
+</div>
 
 @code {
+    [Parameter]
+    public string UserName { get; set; }
 
+    public IEnumerable<ShortWineDto>? recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await _httpWine.GetByUserNameAsync(UserName);
+    }
 }

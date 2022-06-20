@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager _navigation
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -20,15 +21,28 @@
             <MudText Typo="Typo.h6">Rewinery</MudText>
         </MudDrawerHeader>
         <MudNavMenu>
-            <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/recipes">Wine recepies</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/create-wine">Create wine</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/topics">Topics</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/swagger">Swagger</MudNavLink>
-            <hr style="width: 80%;margin-left: 10%;height: 2px;"/>
-            <MudNavLink Match="NavLinkMatch.All" Href="/user-orders">My orders</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/user-recipes">My recipes</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/user-topics">My topics</MudNavLink>
+            <AuthorizeView>
+                <Authorized>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/recipes">Wine recepies</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/create-wine">Create wine</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/topics">Topics</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/swagger">Swagger</MudNavLink>
+                    <hr style="width: 80%;margin-left: 10%;height: 2px;" />
+                    @if (context.User.Identity?.Name != null)
+                    {
+                        <MudNavLink Match="NavLinkMatch.All" OnClick="@(w => UserOrder(@context.User.Identity?.Name))">My orders</MudNavLink>
+                        <MudNavLink Match="NavLinkMatch.All" OnClick="@(w => UserRecipe(@context.User.Identity?.Name))">My recipes</MudNavLink>
+                        <MudNavLink Match="NavLinkMatch.All" OnClick="@(w => UserTopic(@context.User.Identity?.Name))">My topics</MudNavLink>
+                    }
+                </Authorized>
+                <NotAuthorized>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/recipes">Wine recepies</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/create-wine">Create wine</MudNavLink>
+                    <MudNavLink Match="NavLinkMatch.All" Href="/topics">Topics</MudNavLink>
+                </NotAuthorized>
+            </AuthorizeView>
         </MudNavMenu>
     </MudDrawer>
     @Body
@@ -47,4 +61,8 @@
     {
         open = !open;
     }
+
+    void UserOrder(string UserName) => _navigation.NavigateTo($"/{UserName}/orders");
+    void UserRecipe(string UserName) => _navigation.NavigateTo($"/{UserName}/recipes");
+    void UserTopic(string UserName) => _navigation.NavigateTo($"/{UserName}/topics");
 }
