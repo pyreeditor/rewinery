@@ -1,15 +1,25 @@
 ﻿@page "/user-topics"
-
-
+@using Rewinery.Client.Shared.Components
+@using Rewinery.Client.Infrastructure.HttpTopic
+@using Rewinery.Shared.TopicGroup.TopicPage
+@inject HttpTopicRepository _httpTopic
 
 <div class="user-topic-bg-animation">
-    <div class="container" style="height: 100vh;">
-        <div class="row">
-            <div class="col-md-10 frozen-glass" style="max-height = 200px; justify-content: center">
-                <div class="" style="">
-                    some text rot ebal
-                </div>
-            </div>
-        </div>
-    </div>
+    @if (topics != null)
+    {
+        @foreach (var topic in topics)
+        {
+            <TopicCard Topic="topic" />
+        }
+    }
+
 </div>
+
+@code {
+    public IEnumerable<ShortTopicDto>? topics;
+
+    protected override async Task OnInitializedAsync()
+    {
+        topics = await _httpTopic.GetAllShortAsync();
+    }
+}
