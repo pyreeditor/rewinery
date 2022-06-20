@@ -22,7 +22,7 @@ namespace Rewinery.Client.Infrastructure.HttpTopic
 
         public async Task<IEnumerable<ShortTopicDto>> GetAllByUserNameAsync(string user)
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<ShortTopicDto>>($"/api/topic/short/{user}");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<ShortTopicDto>>($"/api/topics/short/{user}");
         }
         #endregion
 

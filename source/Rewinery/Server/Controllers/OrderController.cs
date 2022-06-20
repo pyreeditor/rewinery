@@ -25,6 +25,13 @@ namespace Rewinery.Server.Controllers
         {
             return await _orderRepository.GetAllAsync();
         }
+
+        [HttpGet]
+        [Route("/api/order/byuser/{user}")]
+        public async Task<IEnumerable<OrderDto>> GetAllByUserNameAsync(string user)
+        {
+            return await _orderRepository.GetAllByUserNameAsync(user);
+        }
         #endregion
 
         #region create

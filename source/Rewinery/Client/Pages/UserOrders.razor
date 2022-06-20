@@ -1,24 +1,24 @@
-﻿@page "/{UserName}/recipes"
+﻿@page "/{UserName}/orders"
+
+<PageTitle>User orders</PageTitle>
 
 @using Rewinery.Client.Shared.Components
-@using Rewinery.Client.Infrastructure.HttpWines
-@using Rewinery.Shared.WineGroup.WineRecipePage
+@using Rewinery.Client.Infrastructure.HttpOrder
+@using Rewinery.Shared.OrderGroup.Orders
 
-@inject HttpWineRepository _httpWine
-
-<PageTitle>User recipes</PageTitle>
+@inject HttpOrderRepository _httpOrder
 
 <div class="user-recipes-bg-animation" style="min-height: 100vh; height: fit-content; width: 100%;">
     <div class="row" style="--bs-gutter-x: unset; padding-bottom: 50px;">
         <div class="col-12">
             <div class="wr-pt">
                 <div class="row gy-5 wr-mb" style="--bs-gutter-x: unset;">
-                    @if (recipes != null)
+                    @if (orders != null)
                     {
-                        @foreach (var recipe in recipes)
+                        @foreach (var order in orders)
                         {
                             <div class="col-3">
-                                <WineRecipeCard Wine="recipe" />
+                                <OrderCard Order="order" />
                             </div>
                         }
                     }
@@ -36,10 +36,10 @@
     [Parameter]
     public string UserName { get; set; }
 
-    public IEnumerable<ShortWineDto>? recipes;
+    public IEnumerable<OrderDto>? orders;
 
     protected override async Task OnInitializedAsync()
     {
-        recipes = await _httpWine.GetByUserNameAsync(UserName);
+        orders = await _httpOrder.GetAllByUserNameAsync(UserName);
     }
 }
