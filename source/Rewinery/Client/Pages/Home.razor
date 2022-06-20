@@ -1,5 +1,8 @@
 ﻿@page "/"
 
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
 <PageTitle>Home</PageTitle>
 
 <div class="home-bg-animation" style="height: 100vh;">
@@ -7,13 +10,26 @@
         <div class="position-absolute top-50 start-50 translate-middle text-white">
             <h1>Hello dear customer</h1>
             <p>We have prepared for you many interesting recipes for wine, which you can make yourself or order from us</p>
-            <a href="#" class="btn-neon">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                start
-            </a>
+            <AuthorizeView>
+                <Authorized>
+                    <a href="/topics" class="btn-neon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        topic
+                    </a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="authentication/register" class="btn-neon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        start
+                    </a>
+                </NotAuthorized>
+            </AuthorizeView>
         </div>
         <div class="position-absolute bottom-0 end-0 m-4">©  Rewinery 2022</div>
     </div>

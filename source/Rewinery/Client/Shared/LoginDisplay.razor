@@ -7,7 +7,7 @@
 <AuthorizeView>
     <Authorized>
         <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
+        <MudChip OnClick="BeginSignOut" Variant="Variant.Text" Color="Color.Primary">Log out</MudChip>
     </Authorized>
     <NotAuthorized>
         <MudChip Href="authentication/register" Variant="Variant.Text" Color="Color.Primary">Register</MudChip>
