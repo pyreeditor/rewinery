@@ -22,14 +22,14 @@ namespace Rewinery.Server.Controllers
         }
 
         [HttpGet]
-        [Route("/api/topic/short")]
+        [Route("/api/topics/short")]
         public async Task<IEnumerable<ShortTopicDto>> GetAllShortAsync()
         {
             return await _topicRepository.GetAllShortAsync();
         }
 
         [HttpGet]
-        [Route("/api/topic/short/{user}")]
+        [Route("/api/topics/short/{user}")]
         public async Task<IEnumerable<ShortTopicDto>> GetAllByUserNameAsync(string user)
         {
             return await _topicRepository.GetAllByUserNameAsync(user);
