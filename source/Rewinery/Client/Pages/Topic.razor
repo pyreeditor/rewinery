@@ -1,0 +1,42 @@
+﻿@page "/topics/{Id}"
+@using Rewinery.Client.Shared.Components
+@using Rewinery.Client.Infrastructure.HttpTopic
+@using Rewinery.Shared.TopicGroup.Topic
+@using Rewinery.Shared.TopicGroup.TopicPage
+@inject HttpTopicRepository _httpTopic
+@if (topic != null)
+{
+    <div class="topicbganimation">
+        <div class="container pt-4" style="height: 100vh;">
+            <div class="row justify-content-center topicFrozenGlass p-4">
+                <div class="col-12 fs-3 fw-bolder mt-2 text-center">
+                    @topic.Title
+                </div>
+
+                <div class="col-12 fs-6 mt-6 text-align-left">
+                    @topic.Description
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6 fs-6 mt-2 text-align-left align-self-start">
+                    <span class="mr-2 ">@topic.Created</span><MudIcon Icon="@Icons.Filled.Today" Title="Date" />
+                </div
+                <div class="col-6 fs-6 mt-2 align-self-end" style="text-align:right">
+                    <span class="mr-2 ">@topic.User</span><MudIcon awdasd Icon="@Icons.Filled.Person" Title="User" />
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    @*public IEnumerable<ShortTopicDto>? topics;*@
+    [Parameter]
+    public string Id { get; set; }
+
+    public TopicDto? topic;
+    protected override async Task OnInitializedAsync()
+    {
+        topic = await _httpTopic.GetAsync(Id);
+    }
+}

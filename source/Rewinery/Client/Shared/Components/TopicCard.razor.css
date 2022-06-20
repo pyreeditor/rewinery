@@ -1,0 +1,9 @@
+﻿.TopicFrozenGlass {
+    margin-left: 1.5%;
+    margin-top: 6%;
+    background: inherit;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}

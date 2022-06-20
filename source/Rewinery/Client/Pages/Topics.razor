@@ -1,7 +1,32 @@
 ﻿@page "/topics"
+@using Rewinery.Client.Shared.Components
+@using Rewinery.Client.Infrastructure.HttpTopic
+@using Rewinery.Shared.TopicGroup.TopicPage
+@inject HttpTopicRepository _httpTopic
 
-<h3>Topics</h3>
+
+
+<div class="topicbganimation">
+    <div class="container pt-4" style="height: 100vh;">
+        <div class="row justify-content-center pb-10" style="position: unset;">
+            @if (topics != null)
+            {
+                @foreach (var topic in topics.Reverse())
+                {
+                    <TopicCard Topic="topic" />
+                }
+            }
+
+        </div>
+    </div>
+</div>
 
 @code {
+    public IEnumerable<ShortTopicDto>? topics;
 
+    protected override async Task OnInitializedAsync()
+    {
+        topics = await _httpTopic.GetAllShortAsync();
+        
+    }
 }

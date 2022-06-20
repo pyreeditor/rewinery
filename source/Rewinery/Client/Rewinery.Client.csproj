@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\Topic.razor.css" />
+    <None Remove="Shared\Components\TopicCard.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Topic.razor.css" />
+    <Content Include="Shared\Components\TopicCard.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\cardimages\RedWineBottleAndGlass_1.svg" />
   </ItemGroup>
 
